@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أيوان الحجاز - مؤسسة شاملة للمكيفات بجدة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(0, 82, 147, 0.85) 0%, rgba(0, 45, 98, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 85vh;
+            min-height: 600px;
+            max-height: 800px;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 1s ease-out forwards;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 123, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border-right: 4px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-right-color: #007bff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 70vh;
+                min-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- قسم الهيرو المطور -->
+    <section class="hero-section flex items-center justify-center relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- النص والعنوان -->
+                <div class="text-white fade-in">
+                    <div class="mb-6">
+                        <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">مؤسسة أيوان الحجاز</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                        الحلول <span class="text-blue-300">الشاملة</span> لأنظمة التكييف والتبريد
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 leading-relaxed">
+                        نقدم خدمات متكاملة تشمل التصميم، التركيب، الصيانة، والإصلاح لأنظمة التكييف المركزية والمنزلية بجودة لا تضاهى.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <a href="https://wa.me/+966596678717" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg pulse-glow">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            تواصل عبر واتساب
+                        </a>
+                        <a href="tel:0596678717" class="bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg border-2 border-white">
+                            <i class="fas fa-phone-alt"></i>
+                            اتصل بنا الآن
+                        </a>
+                    </div>
+                    
+                    <!-- ميزات سريعة -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-tools text-blue-300 text-xl mb-2"></i>
+                            <p class="text-xs font-medium">صيانة دورية</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-bolt text-blue-300 text-xl mb-2"></i>
+                            <p class="text-xs font-medium">تركيب أنظمة</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-cogs text-blue-300 text-xl mb-2"></i>
+                            <p class="text-xs font-medium">إصلاح أعطال</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-headset text-blue-300 text-xl mb-2"></i>
+                            <p class="text-xs font-medium">دعم فني 24/7</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- الصورة أو العنصر البصري -->
+                <div class="flex justify-center slide-in-right">
+                    <div class="relative">
+                        <div class="floating-element">
+                            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
+                                <div class="bg-white rounded-xl p-4 shadow-lg">
+                                    <div class="flex justify-center mb-4">
+                                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-snowflake text-blue-500 text-2xl"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-center text-gray-800 mb-2">أيوان الحجاز</h3>
+                                    <p class="text-gray-600 text-center text-sm">الريادة في حلول التكييف منذ 15 عاماً</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- عناصر عائمة -->
+                        <div class="absolute -top-3 -right-3 bg-yellow-400 text-gray-800 font-bold py-1 px-3 rounded-full shadow-lg floating-element text-sm" style="animation-delay: 1s;">
+                            <span>خصم 20%</span>
+                        </div>
+                        <div class="absolute -bottom-3 -left-3 bg-green-500 text-white font-bold py-1 px-3 rounded-full shadow-lg floating-element text-sm" style="animation-delay: 2s;">
+                            <span>ضمان 3 سنوات</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- زر التمرير للأسفل -->
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
+            <a href="#features" class="text-white hover:text-blue-200 transition-colors duration-300">
+                <div class="flex flex-col items-center">
+                    <span class="text-sm mb-1">اكتشف المزيد</span>
+                    <i class="fas fa-chevron-down animate-bounce text-lg"></i>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- قسم الميزات السريعة -->
+    <section id="features" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">لماذا تختار <span class="text-blue-600">أيوان الحجاز</span>؟</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">نحن نقدم حلولاً شاملة ومتكاملة لأنظمة التكييف والتبريد بمعايير الجودة العالمية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="feature-card bg-gray-50 rounded-xl p-5">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
+                        <i class="fas fa-award text-blue-600 text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">جودة لا تضاهى</h3>
+                    <p class="text-gray-600 text-sm">نستخدم أفضل المواد وأحدث التقنيات لضمان أداء مثالي ودائم لأنظمة التكييف</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 rounded-xl p-5">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3">
+                        <i class="fas fa-clock text-green-600 text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">خدمة سريعة</h3>
+                    <p class="text-gray-600 text-sm">فريقنا الفني جاهز للوصول إليك في أسرع وقت لحل أي مشكلة في نظام التكييف</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 rounded-xl p-5">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
+                        <i class="fas fa-users text-purple-600 text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">فريق محترف</h3>
+                    <p class="text-gray-600 text-sm">فريقنا من الفنيين المدربين ذوي الخبرة الواسعة في جميع أنواع أنظمة التكييف</p>
+                </div>
+                
+                <div class="feature-card bg-gray-50 rounded-xl p-5">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-3">
+                        <i class="fas fa-shield-alt text-red-600 text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">ضمان شامل</h3>
+                    <p class="text-gray-600 text-sm">نقدم ضماناً شاملاً على جميع أعمالنا وقطع الغيار لضمان رضاك التام</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // تأثيرات الظهور عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثيرات للعناصر عند التمرير
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // مراقبة عناصر الميزات
+            document.querySelectorAll('.feature-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
