@@ -24,6 +24,20 @@
             height: 85vh;
             min-height: 600px;
             max-height: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: white;
+            border-radius: 50% 50% 0 0;
+            transform: translateY(50%);
         }
         
         .floating-element {
@@ -36,23 +50,25 @@
             100% { transform: translateY(0px); }
         }
         
-        .fade-in {
-            animation: fadeIn 1.2s ease-out forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         .slide-in-right {
+            opacity: 0;
+            transform: translateX(100px);
             animation: slideInRight 1s ease-out forwards;
         }
         
         @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+        
+        .stagger-1 { animation-delay: 0.2s; }
+        .stagger-2 { animation-delay: 0.4s; }
+        .stagger-3 { animation-delay: 0.6s; }
+        .stagger-4 { animation-delay: 0.8s; }
+        .stagger-5 { animation-delay: 1s; }
+        .stagger-6 { animation-delay: 1.2s; }
         
         .pulse-glow {
             animation: pulseGlow 2s infinite;
@@ -80,6 +96,10 @@
                 height: 70vh;
                 min-height: 500px;
             }
+            
+            .hero-section::after {
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -89,18 +109,24 @@
         <div class="container mx-auto px-4 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <!-- النص والعنوان -->
-                <div class="text-white fade-in">
-                    <div class="mb-6">
+                <div class="text-white">
+                    <!-- البادئة -->
+                    <div class="mb-6 slide-in-right stagger-1">
                         <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">مؤسسة أيوان الحجاز</span>
                     </div>
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                    
+                    <!-- العنوان الرئيسي -->
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight slide-in-right stagger-2">
                         الحلول <span class="text-blue-300">الشاملة</span> لأنظمة التكييف والتبريد
                     </h1>
-                    <p class="text-lg md:text-xl mb-8 text-blue-100 leading-relaxed">
+                    
+                    <!-- الوصف -->
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 leading-relaxed slide-in-right stagger-3">
                         نقدم خدمات متكاملة تشمل التصميم، التركيب، الصيانة، والإصلاح لأنظمة التكييف المركزية والمنزلية بجودة لا تضاهى.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <!-- أزرار الاتصال -->
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8 slide-in-right stagger-4">
                         <a href="https://wa.me/+966596678717" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg pulse-glow">
                             <i class="fab fa-whatsapp text-xl"></i>
                             تواصل عبر واتساب
@@ -112,7 +138,7 @@
                     </div>
                     
                     <!-- ميزات سريعة -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 slide-in-right stagger-5">
                         <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
                             <i class="fas fa-tools text-blue-300 text-xl mb-2"></i>
                             <p class="text-xs font-medium">صيانة دورية</p>
@@ -133,7 +159,7 @@
                 </div>
                 
                 <!-- الصورة أو العنصر البصري -->
-                <div class="flex justify-center slide-in-right">
+                <div class="flex justify-center slide-in-right stagger-6">
                     <div class="relative">
                         <div class="floating-element">
                             <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
@@ -172,49 +198,7 @@
         </div>
     </section>
     
-    <!-- قسم الميزات السريعة -->
-    <section id="features" class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">لماذا تختار <span class="text-blue-600">أيوان الحجاز</span>؟</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">نحن نقدم حلولاً شاملة ومتكاملة لأنظمة التكييف والتبريد بمعايير الجودة العالمية</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                <div class="feature-card bg-gray-50 rounded-xl p-5">
-                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
-                        <i class="fas fa-award text-blue-600 text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">جودة لا تضاهى</h3>
-                    <p class="text-gray-600 text-sm">نستخدم أفضل المواد وأحدث التقنيات لضمان أداء مثالي ودائم لأنظمة التكييف</p>
-                </div>
-                
-                <div class="feature-card bg-gray-50 rounded-xl p-5">
-                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-3">
-                        <i class="fas fa-clock text-green-600 text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">خدمة سريعة</h3>
-                    <p class="text-gray-600 text-sm">فريقنا الفني جاهز للوصول إليك في أسرع وقت لحل أي مشكلة في نظام التكييف</p>
-                </div>
-                
-                <div class="feature-card bg-gray-50 rounded-xl p-5">
-                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
-                        <i class="fas fa-users text-purple-600 text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">فريق محترف</h3>
-                    <p class="text-gray-600 text-sm">فريقنا من الفنيين المدربين ذوي الخبرة الواسعة في جميع أنواع أنظمة التكييف</p>
-                </div>
-                
-                <div class="feature-card bg-gray-50 rounded-xl p-5">
-                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-3">
-                        <i class="fas fa-shield-alt text-red-600 text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">ضمان شامل</h3>
-                    <p class="text-gray-600 text-sm">نقدم ضماناً شاملاً على جميع أعمالنا وقطع الغيار لضمان رضاك التام</p>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <script>
         // تأثيرات الظهور عند التمرير
