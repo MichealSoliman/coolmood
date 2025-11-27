@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أيوان الحجاز - مؤسسة شاملة للمكيفات بجدة</title>
+    <title>أيوان الحجاز - نبذة عنا</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -11,63 +11,74 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
         body {
             font-family: 'Cairo', sans-serif;
         }
         
-        .hero-section {
-            background: linear-gradient(135deg, rgba(0, 82, 147, 0.85) 0%, rgba(0, 45, 98, 0.8) 100%), 
-                        url('https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: auto;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-            padding: 2rem 0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
-        }
-        
+        /* أنيميشنات مخصصة */
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
         
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(100px);
-            animation: slideInRight 1s ease-out forwards;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        @keyframes slideInRight {
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
         
-        .stagger-1 { animation-delay: 0.2s; }
-        .stagger-2 { animation-delay: 0.4s; }
-        .stagger-3 { animation-delay: 0.6s; }
-        .stagger-4 { animation-delay: 0.8s; }
-        .stagger-5 { animation-delay: 1s; }
-        .stagger-6 { animation-delay: 1.2s; }
-        
-        .pulse-glow {
-            animation: pulseGlow 2s infinite;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 123, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.8s ease-out forwards;
         }
         
         .feature-card {
@@ -77,180 +88,199 @@
         
         .feature-card:hover {
             transform: translateY(-5px);
-            border-right-color: #007bff;
+            border-right-color: #3b82f6;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
-        /* تحسينات للتجاوب */
-        .hero-content {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+        .image-hover {
+            transition: all 0.5s ease;
+            filter: brightness(0.9);
         }
         
-        .hero-image-container {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
+        .image-hover:hover {
+            transform: scale(1.03);
+            filter: brightness(1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
         
-        .hero-image {
-            max-width: 100%;
-            height: auto;
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        .contact-icon {
+            transition: all 0.3s ease;
         }
         
-        @media (max-width: 768px) {
-            .hero-section {
-                min-height: auto;
-                padding: 1.5rem 0;
-            }
-            
-            .hero-content {
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-                text-align: center;
-            }
-            
-            .hero-image-container {
-                margin-top: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .floating-badges {
-                transform: scale(0.8);
-            }
+        .contact-link:hover .contact-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
         }
         
-        @media (max-width: 480px) {
-            .hero-section {
-                padding: 1rem 0;
-            }
-            
-            .hero-content {
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-            }
-            
-            .hero-image-container {
-                margin-top: 1rem;
-                margin-bottom: 1rem;
-            }
-            
-            .floating-badges {
-                transform: scale(0.7);
-            }
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- hero section -->
-    <section class="hero-section">
+    <!-- قسم نبذة عنا -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden" id="about">
+        <!-- عناصر زخرفية خلفية -->
+        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-20"></div>
+        
         <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center hero-content">
-                <!-- النص والعنوان -->
-                <div class="text-white order-2 lg:order-1">
-                    <!-- البادئة -->
-                    <div class="mb-6 slide-in-right stagger-1">
-                        <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">مؤسسة أيوان الحجاز</span>
-                    </div>
-                    
-                    <!-- العنوان الرئيسي -->
-                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight slide-in-right stagger-2">
-                        الحلول <span class="text-blue-300">الشاملة</span> لأنظمة التكييف والتبريد
-                    </h1>
-                    
-                    <!-- الوصف -->
-                    <p class="text-lg md:text-xl mb-8 text-blue-100 leading-relaxed slide-in-right stagger-3">
-                        نقدم خدمات متكاملة تشمل التصميم، التركيب، الصيانة، والإصلاح لأنظمة التكييف المركزية والمنزلية بجودة لا تضاهى.
-                    </p>
-                    
-                    <!-- أزرار الاتصال -->
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8 slide-in-right stagger-4">
-                        <a href="https://wa.me/+966596678717" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg pulse-glow">
-                            <i class="fab fa-whatsapp text-xl"></i>
-                            تواصل عبر واتساب
-                        </a>
-                        <a href="tel:0596678717" class="bg-white hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg border-2 border-white">
-                            <i class="fas fa-phone-alt"></i>
-                            اتصل بنا الآن
-                        </a>
-                    </div>
-                    
-                    <!-- ميزات سريعة -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 slide-in-right stagger-5">
-                        <div class="bg-white text-black backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-tools text-xl mb-2"></i>
-                            <p class="text-xs font-medium">صيانة دورية</p>
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- المحتوى النصي -->
+                <div class="w-full lg:w-1/2">
+                    <div class="space-y-8">
+                        <!-- العنوان الرئيسي -->
+                        <div class="opacity-0 animate-fadeInUp stagger-1">
+                            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                                مرحبًا بكم في 
+                                <span class="gradient-text">مركز خدمات التكييف والتبريد</span> 
+                                الأفضل في جدة والمملكة
+                            </h2>
+                            <div class="w-24 h-1 bg-blue-500 rounded-full"></div>
                         </div>
-                        <div class="bg-white text-black bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-bolt text-xl mb-2"></i>
-                            <p class="text-xs font-medium">تركيب أنظمة</p>
+                        
+                        <!-- بطاقات الميزات -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 opacity-0 animate-fadeInUp stagger-2">
+                            <div class="feature-card bg-white p-4 rounded-xl shadow-md flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center ml-3">
+                                    <i class="fas fa-user-tie text-blue-600 text-xl"></i>
+                                </div>
+                                <h5 class="text-lg font-semibold text-gray-800">فنيون خبراء في جدة</h5>
+                            </div>
+                            
+                            <div class="feature-card bg-white p-4 rounded-xl shadow-md flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center ml-3">
+                                    <i class="fas fa-award text-blue-600 text-xl"></i>
+                                </div>
+                                <h5 class="text-lg font-semibold text-gray-800">أفضل خدمات بجودة عالية</h5>
+                            </div>
                         </div>
-                        <div class="bg-white text-black bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-cogs text-xl mb-2"></i>
-                            <p class="text-xs font-medium">إصلاح أعطال</p>
+                        
+                        <!-- النص الوصفي -->
+                        <div class="opacity-0 animate-fadeInUp stagger-3">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
+                                نقدم خدمات تركيب وصيانة أنظمة التكييف المركزي باستخدام أحدث التقنيات
+                                مثل <span class="font-bold text-blue-600">VRF وVRV</span>. نحن نلتزم بتقديم الجودة والراحة 
+                                لعملائنا من خلال خبراتنا المتطورة.
+                            </p>
                         </div>
-                        <div class="bg-white text-black bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-headset text-xl mb-2"></i>
-                            <p class="text-xs font-medium">دعم فني 24/7</p>
+                        
+                        <!-- معلومات الاتصال -->
+                        <div class="border-t border-gray-200 pt-6 space-y-4 opacity-0 animate-fadeInUp stagger-4">
+                            <a href="tel:0596678717" class="contact-link flex items-center group">
+                                <div class="contact-icon w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white ml-4 animate-pulse-slow">
+                                    <i class="fas fa-phone-alt text-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors" dir="ltr">059 667 8717</h5>
+                                    <p class="text-gray-600 text-sm">اتصل بنا الآن</p>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:info@coolmood.net" class="contact-link flex items-center group">
+                                <div class="contact-icon w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white ml-4">
+                                    <i class="fas fa-envelope text-lg"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">info@coolmood.net</h6>
+                                    <p class="text-gray-600 text-sm">راسلنا عبر البريد</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- الصورة أو العنصر البصري -->
-                <div class="flex justify-center slide-in-right stagger-6 order-1 lg:order-2 hero-image-container">
-                    <div class="relative">
-                        <div class="floating-element">
-                            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-2xl">
-                                <div class="bg-white rounded-xl p-2 md:p-4 shadow-lg">
-                                   <img src="./images/logo.png" alt="شعار أيوان الحجاز" class="hero-image max-h-[300px] md:max-h-[400px] w-auto">
+                <!-- معرض الصور -->
+                <div class="w-full lg:w-1/2">
+                    <div class="grid grid-cols-2 gap-4 relative">
+                        <!-- الصورة 1 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-1">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-64 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(24).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">أنظمة تكييف متطورة</p>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- عناصر عائمة -->
-                        <div class="floating-badges">
-                            <div class="absolute -top-3 -right-3 bg-yellow-400 text-gray-800 font-bold py-1 px-3 rounded-full shadow-lg floating-element" style="animation-delay: 1s;">
-                                <span class="text-xs md:text-sm">خصم 20%</span>
+                        <!-- الصورة 2 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-2 mt-8">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-80 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(13).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">فريق فني متخصص</p>
+                                </div>
                             </div>
-                            <div class="absolute -bottom-3 -left-3 bg-green-500 text-white font-bold py-1 px-3 rounded-full shadow-lg floating-element" style="animation-delay: 2s;">
-                                <span class="text-xs md:text-sm">ضمان 3 سنوات</span>
+                        </div>
+                        
+                        <!-- الصورة 3 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-3 -mt-4">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-56 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(15).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">أحدث التقنيات</p>
+                                </div>
                             </div>
+                        </div>
+                        
+                        <!-- الصورة 4 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-4 mt-4">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-72 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(24).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">خدمات شاملة</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- عنصر زخرفي عائم -->
+                        <div class="absolute -bottom-6 -left-6 bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg animate-float">
+                            <span class="font-bold">+10 سنوات خبرة</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- زر التمرير للأسفل -->
-        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
-            <a href="#features" class="text-white hover:text-blue-200 transition-colors duration-300">
-                <div class="flex flex-col items-center">
-                    <span class="text-sm mb-1">اكتشف المزيد</span>
-                    <i class="fas fa-chevron-down animate-bounce text-lg"></i>
-                </div>
-            </a>
-        </div>
     </section>
-    
+
     <script>
-        // تأثيرات الظهور عند التمرير
+        // تفعيل الأنيميشنات عند التمرير للقسم
         document.addEventListener('DOMContentLoaded', function() {
-            // إضافة تأثيرات للعناصر عند التمرير
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+            const aboutSection = document.getElementById('about');
+            const animatedElements = aboutSection.querySelectorAll('.animate-fadeInUp, .animate-fadeInRight');
             
-            const observer = new IntersectionObserver(function(entries) {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
+                        const element = entry.target;
+                        element.style.opacity = '1';
+                        
+                        // إضافة تأخير للعناصر المتسلسلة
+                        if (element.classList.contains('stagger-1')) {
+                            element.style.animationDelay = '0.1s';
+                        } else if (element.classList.contains('stagger-2')) {
+                            element.style.animationDelay = '0.2s';
+                        } else if (element.classList.contains('stagger-3')) {
+                            element.style.animationDelay = '0.3s';
+                        } else if (element.classList.contains('stagger-4')) {
+                            element.style.animationDelay = '0.4s';
+                        }
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1 });
             
-            // مراقبة عناصر الميزات
-            document.querySelectorAll('.feature-card').forEach(card => {
-                observer.observe(card);
+            animatedElements.forEach(element => {
+                observer.observe(element);
             });
         });
     </script>

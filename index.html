@@ -449,6 +449,123 @@
             }
         }
     </style>
+    <!-- قسم نبذة عنا -->
+         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        /* أنيميشنات مخصصة */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border-right: 4px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-right-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-hover {
+            transition: all 0.5s ease;
+            filter: brightness(0.9);
+        }
+        
+        .image-hover:hover {
+            transform: scale(1.03);
+            filter: brightness(1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        .contact-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover .contact-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 
 </head>
 
@@ -751,82 +868,162 @@
 
 
     <!-- بداية قسم نبذة عن الشركة -->
-    <div class="container-xxl py-5" dir="rtl" id="about">
-        <div class="container">
-            <div class="row g-5 align-items-center">
+    
+    <section class="py-16 md:py-24 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden" id="about">
+        <!-- عناصر زخرفية خلفية -->
+        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-20"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
                 <!-- المحتوى النصي -->
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="content-wrapper h-100">
-                        <h3 class="display-6 mb-5 fw-bold">مرحبًا بكم في مركز خدمات التكييف والتبريد الأفضل في جده و
-                            المملكه</h>
-
-                            <div class="features-grid row g-4 mb-4">
-                                <div class="col-sm-6">
-                                    <div
-                                        class="feature-card d-flex align-items-center p-3 rounded-3 shadow-sm hover-lift">
-                                        <img class="flex-shrink-0 ms-3" width="48" height="48"
-                                            src="img/icon/icon-07-primary.png" alt="فنيين خبراء" loading="lazy">
-                                        <h5 class="mb-0">فنيون خبراء في جده</h5>
-                                    </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="space-y-8">
+                        <!-- العنوان الرئيسي -->
+                        <div class="opacity-0 animate-fadeInUp stagger-1">
+                            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                                مرحبًا بكم في 
+                                <span class="gradient-text">مركز خدمات التكييف والتبريد</span> 
+                                الأفضل في جدة والمملكة
+                            </h2>
+                            <div class="w-24 h-1 bg-blue-500 rounded-full"></div>
+                        </div>
+                        
+                        <!-- بطاقات الميزات -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 opacity-0 animate-fadeInUp stagger-2">
+                            <div class="feature-card bg-white p-4 rounded-xl shadow-md flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center ml-3">
+                                    <i class="fas fa-user-tie text-blue-600 text-xl"></i>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div
-                                        class="feature-card d-flex align-items-center p-3 rounded-3 shadow-sm hover-lift">
-                                        <img class="flex-shrink-0 ms-3" width="48" height="48"
-                                            src="img/icon/icon-09-primary.png" alt="أفضل خدمات" loading="lazy">
-                                        <h5 class="mb-0">أفضل خدمات بجودة عالية</h5>
-                                    </div>
-                                </div>
+                                <h5 class="text-lg font-semibold text-gray-800">فنيون خبراء في جدة</h5>
                             </div>
-
-                            <p class="lead mb-4 text-black">
+                            
+                            <div class="feature-card bg-white p-4 rounded-xl shadow-md flex items-center">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center ml-3">
+                                    <i class="fas fa-award text-blue-600 text-xl"></i>
+                                </div>
+                                <h5 class="text-lg font-semibold text-gray-800">أفضل خدمات بجودة عالية</h5>
+                            </div>
+                        </div>
+                        
+                        <!-- النص الوصفي -->
+                        <div class="opacity-0 animate-fadeInUp stagger-3">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
                                 نقدم خدمات تركيب وصيانة أنظمة التكييف المركزي باستخدام أحدث التقنيات
-                                مثل VRF وVRV. نحن نلتزم بتقديم الجودة والراحة لعملائنا من خلال خبراتنا المتطورة.
+                                مثل <span class="font-bold text-blue-600">VRF وVRV</span>. نحن نلتزم بتقديم الجودة والراحة 
+                                لعملائنا من خلال خبراتنا المتطورة.
                             </p>
-
-                            <div class="contact-info border-top mt-4 pt-4">
-                                <a href="tel:0596678717"
-                                    class="contact-link d-flex align-items-center mb-3 text-decoration-none">
-                                    <div class="btn-lg-square bg-primary rounded-circle ms-3 pulse">
-                                        <i class="fa fa-phone-alt text-white"></i>
-                                    </div>
-                                    <h5 class="mb-0" dir="ltr">059 667 8717</h5>
-                                </a>
-                                <a href="mailto:info@coolmood.net"
-                                    class="contact-link d-flex align-items-center text-decoration-none">
-                                    <div class="btn-lg-square bg-primary rounded-circle ms-3 pulse">
-                                        <i class="fa fa-envelope text-white"></i>
-                                    </div>
-                                    <h6 class="mb-0">info@coolmood.net</h6>
-                                </a>
-                            </div>
+                        </div>
+                        
+                        <!-- معلومات الاتصال -->
+                        <div class="border-t border-gray-200 pt-6 space-y-4 opacity-0 animate-fadeInUp stagger-4">
+                            <a href="tel:0596678717" class="contact-link flex items-center group">
+                                <div class="contact-icon w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white ml-4 animate-pulse-slow">
+                                    <i class="fas fa-phone-alt text-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors" dir="ltr">059 667 8717</h5>
+                                    <p class="text-gray-600 text-sm">اتصل بنا الآن</p>
+                                </div>
+                            </a>
+                            
+                            <a href="mailto:info@coolmood.net" class="contact-link flex items-center group">
+                                <div class="contact-icon w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white ml-4">
+                                    <i class="fas fa-envelope text-lg"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-lg font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">info@coolmood.net</h6>
+                                    <p class="text-gray-600 text-sm">راسلنا عبر البريد</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <!-- الصور -->
-                <div class="col-lg-6">
-                    <div class="row g-3">
-                        <div class="col-6 text-start">
-                            <img class="img-fluid w-75 wow zoomIn" data-wow-delay="0.1s" src="./images/(24).avif"
-                                style="margin-top: 25%;" alt="صورة نبذة عن الشركة">
+                
+                <!-- معرض الصور -->
+                <div class="w-full lg:w-1/2">
+                    <div class="grid grid-cols-2 gap-4 relative">
+                        <!-- الصورة 1 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-1">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-64 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(24).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">أنظمة تكييف متطورة</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6 text-end">
-                            <img class="img-fluid w-100 wow zoomIn" data-wow-delay="0.3s" src="./images/(13).avif"
-                                alt="صورة نبذة عن الشركة">
+                        
+                        <!-- الصورة 2 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-2 mt-8">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-80 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(13).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">فريق فني متخصص</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6 text-start">
-                            <img class="img-fluid w-50 wow zoomIn" data-wow-delay="0.5s" src="./images/(15).avif"
-                                alt="صورة نبذة عن الشركة">
+                        
+                        <!-- الصورة 3 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-3 -mt-4">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-56 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(15).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">أحدث التقنيات</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-6 text-end">
-                            <img class="img-fluid w-75 wow zoomIn" data-wow-delay="0.7s" src="./images/(24).avif"
-                                alt="صورة نبذة عن الشركة">
+                        
+                        <!-- الصورة 4 -->
+                        <div class="opacity-0 animate-fadeInRight stagger-4 mt-4">
+                            <div class="image-hover rounded-2xl overflow-hidden shadow-lg h-72 bg-gray-200 flex items-center justify-center">
+                                <img class="w-full h-full object-cover" src="./images/(24).avif" alt="صورة نبذة عن الشركة">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p class="text-white font-medium">خدمات شاملة</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- عنصر زخرفي عائم -->
+                        <div class="absolute -bottom-6 -left-6 bg-blue-500 text-white py-2 px-4 rounded-full shadow-lg animate-float">
+                            <span class="font-bold">+10 سنوات خبرة</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <script>
+        // تفعيل الأنيميشنات عند التمرير للقسم
+        document.addEventListener('DOMContentLoaded', function() {
+            const aboutSection = document.getElementById('about');
+            const animatedElements = aboutSection.querySelectorAll('.animate-fadeInUp, .animate-fadeInRight');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        element.style.opacity = '1';
+                        
+                        // إضافة تأخير للعناصر المتسلسلة
+                        if (element.classList.contains('stagger-1')) {
+                            element.style.animationDelay = '0.1s';
+                        } else if (element.classList.contains('stagger-2')) {
+                            element.style.animationDelay = '0.2s';
+                        } else if (element.classList.contains('stagger-3')) {
+                            element.style.animationDelay = '0.3s';
+                        } else if (element.classList.contains('stagger-4')) {
+                            element.style.animationDelay = '0.4s';
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
     <!-- نهاية قسم نبذة عن الشركة -->
 
 
