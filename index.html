@@ -736,6 +736,120 @@
             transform: translateY(2px);
         }
     </style>
+     <!-- قسم الميزات -->
+          <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .feature-card {
+            transition: all 0.4s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, #3b82f6, #10b981);
+            transition: height 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: #e5e7eb;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-circle {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .icon-circle {
+            transform: scale(1.1);
+        }
+        
+        .spec-card-1 {
+            transition: all 0.3s ease;
+            border: 1px solid #f3f4f6;
+        }
+        
+        .spec-card-1:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            border-color: #3b82f6;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .image-container:hover::before {
+            opacity: 1;
+        }
+        
+        .image-container img {
+            transition: transform 0.6s ease;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
 
 </head>
 
@@ -1360,79 +1474,69 @@
     <!-- نهاية قسم نبذة تعريفية عن الشركة -->
 
     <!-- بداية قسم المميزات -->
-    <section class="features py-5" dir="rtl" id="features"
-        style="background: linear-gradient(to bottom, #123456, #0a0a0a); color: #fff;">
-        <div class="container">
+   
+    <section class="py-16 md:py-24 bg-white" dir="rtl" id="features">
+        <div class="container mx-auto px-4">
             <!-- Header Section -->
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="display-5 fw-bold mb-3 text-light" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-                        تكييف مركزي لا مثيل له مع شركة كول مود!
+            <div class="mb-16 text-center">
+                <div class="opacity-0 animate-fadeInUp stagger-1">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                        تكييف مركزي لا مثيل له مع 
+                        <span class="gradient-text">شركة أيوان الحجاز</span>
                     </h1>
-                    <p class="lead text-white-50" style="max-width: 800px; margin: 0 auto;">
-                        نقدم حلولاً متكاملة وخدمات متميزة في مجال التكييف المركزي بجده بأسعار مناسبة وجودة عالية.
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        نقدم حلولاً متكاملة وخدمات متميزة في مجال التكييف المركزي بجدة بأسعار مناسبة وجودة عالية.
                     </p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-8 rounded-full"></div>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div class="row g-4">
+            <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
                 <!-- Image Column -->
-                <div class="col-lg-6">
-                    <div class="position-relative rounded-4 overflow-hidden shadow-lg h-100">
-                        <img class="img-fluid w-100 h-100" src="./images/Artboard 7.avif" alt="خدمات كول مود"
-                            loading="lazy" style="object-fit: cover; filter: brightness(90%);">
+                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInUp stagger-2">
+                    <div class="image-container rounded-2xl shadow-xl overflow-hidden">
+                        <img class="w-full h-[500px] object-cover" src="./images/Artboard 7.avif" alt="خدمات أيوان الحجاز" loading="lazy">
                     </div>
                 </div>
 
                 <!-- Services Cards -->
-                <div class="col-lg-6">
-                    <div class="row g-4">
-                        <div class="col-12">
-                            <div class="card border-0 shadow-sm hover-card"
-                                style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                                <div class="card-body p-4">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="icon-circle bg-primary text-white"
-                                            style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
-                                            <i class="fas fa-tools fa-2x"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0 me-3 text-light">تنفيذ أنظمة التكييف المركزي</h5>
-                                    </div>
-                                    <p class="card-text">توريد وتركيب وتأسيس أنظمة متكاملة للتكييف المركزي</p>
-                                </div>
+                <div class="w-full lg:w-1/2 space-y-6">
+                    <!-- Card 1 -->
+                    <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 opacity-0 animate-fadeInUp stagger-3">
+                        <div class="flex items-start mb-4">
+                            <div class="icon-circle bg-blue-500 text-white w-16 h-16 rounded-full flex items-center justify-center ml-4">
+                                <i class="fas fa-tools text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">تنفيذ أنظمة التكييف المركزي</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed">توريد وتركيب وتأسيس أنظمة متكاملة للتكييف المركزي بأعلى معايير الجودة والكفاءة.</p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-12">
-                            <div class="card border-0 shadow-sm hover-card"
-                                style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                                <div class="card-body p-4">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="icon-circle bg-warning text-white"
-                                            style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
-                                            <i class="fas fa-cogs fa-2x"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0 me-3 text-light">صيانة دورية شاملة</h5>
-                                    </div>
-                                    <p class="card-text">خدمات صيانة احترافية لضمان كفاءة وعمر أطول لنظام التكييف</p>
-                                </div>
+                    <!-- Card 2 -->
+                    <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 opacity-0 animate-fadeInUp stagger-4">
+                        <div class="flex items-start mb-4">
+                            <div class="icon-circle bg-amber-500 text-white w-16 h-16 rounded-full flex items-center justify-center ml-4">
+                                <i class="fas fa-cogs text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">صيانة دورية شاملة</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed">خدمات صيانة احترافية لضمان كفاءة وعمر أطول لنظام التكييف مع خطط صيانة مخصصة.</p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-12">
-                            <div class="card border-0 shadow-sm hover-card"
-                                style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                                <div class="card-body p-4">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="icon-circle bg-success text-white"
-                                            style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; border-radius: 50%;">
-                                            <i class="fas fa-headset fa-2x"></i>
-                                        </div>
-                                        <h5 class="card-title mb-0 me-3 text-light">دعم فني 24/7</h5>
-                                    </div>
-                                    <p class="card-text">فريق متخصص من المهندسين والفنيين لخدمتكم على مدار الساعة</p>
-                                </div>
+                    <!-- Card 3 -->
+                    <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 opacity-0 animate-fadeInUp stagger-5">
+                        <div class="flex items-start mb-4">
+                            <div class="icon-circle bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center ml-4">
+                                <i class="fas fa-headset text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">دعم فني 24/7</h3>
+                                <p class="text-gray-600 text-lg leading-relaxed">فريق متخصص من المهندسين والفنيين لخدمتكم على مدار الساعة مع استجابة فورية للطوارئ.</p>
                             </div>
                         </div>
                     </div>
@@ -1440,48 +1544,68 @@
             </div>
 
             <!-- Specifications Section -->
-            <div class="specs-section mt-5 pt-5">
-                <h2 class="text-center mb-5 text-light" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
-                    مواصفات وخصائص خدماتنا
-                </h2>
-                <div class="row g-4">
-                    <!-- Add more specification cards if needed -->
-                    <div class="col-lg-4">
-                        <div class="card border-0 shadow-sm hover-card"
-                            style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; text-align: center; transition: transform 0.3s;">
-                            <div class="card-body p-4">
-                                <i class="fas fa-fire fa-2x mb-3" style="color: #ff5722;"></i>
-                                <h5 class="card-title text-light">أنظمة مقاومة للحريق</h5>
-                                <p class="card-text">تضمن أعلى معايير الأمان والسلامة.</p>
-                            </div>
+            <div class="mt-16 pt-16 border-t border-gray-200">
+                <div class="text-center mb-12 opacity-0 animate-fadeInUp stagger-1">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                        مواصفات وخصائص خدماتنا
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        نضمن لكم أعلى معايير الجودة والأداء في كل مشروع ننفذه
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Spec Card 1 -->
+                    <div class="spec-card-1 bg-white rounded-2xl p-8 text-center shadow-lg opacity-0 animate-fadeInUp stagger-2">
+                        <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-fire fa-2x text-red-500"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">أنظمة مقاومة للحريق</h3>
+                        <p class="text-gray-600 leading-relaxed">تضمن أعلى معايير الأمان والسلامة مع مواد مقاومة للحريق.</p>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card border-0 shadow-sm hover-card"
-                            style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; text-align: center; transition: transform 0.3s;">
-                            <div class="card-body p-4">
-                                <i class="fas fa-cogs fa-2x mb-3" style="color: #8bc34a;"></i>
-                                <h5 class="card-title text-light">معايير جودة عالية</h5>
-                                <p class="card-text">مصممة لتحقيق الأداء المثالي والعمر الطويل.</p>
-                            </div>
+                    <!-- Spec Card 2 -->
+                    <div class="spec-card-1 bg-white rounded-2xl p-8 text-center shadow-lg opacity-0 animate-fadeInUp stagger-3">
+                        <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-cogs fa-2x text-green-500"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">معايير جودة عالية</h3>
+                        <p class="text-gray-600 leading-relaxed">مصممة لتحقيق الأداء المثالي والعمر الطويل مع ضمان الجودة.</p>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card border-0 shadow-sm hover-card"
-                            style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; text-align: center; transition: transform 0.3s;">
-                            <div class="card-body p-4">
-                                <i class="fas fa-headset fa-2x mb-3" style="color: #4caf50;"></i>
-                                <h5 class="card-title text-light">دعم فني متكامل</h5>
-                                <p class="card-text">تواصل سريع واستجابة فورية.</p>
-                            </div>
+                    <!-- Spec Card 3 -->
+                    <div class="spec-card-1 bg-white rounded-2xl p-8 text-center shadow-lg opacity-0 animate-fadeInUp stagger-4">
+                        <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-headset fa-2x text-blue-500"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">دعم فني متكامل</h3>
+                        <p class="text-gray-600 leading-relaxed">تواصل سريع واستجابة فورية مع فريق دعم متكامل على مدار الساعة.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // تفعيل الأنيميشنات عند التمرير للقسم
+        document.addEventListener('DOMContentLoaded', function() {
+            const section = document.getElementById('features');
+            const animatedElements = section.querySelectorAll('.animate-fadeInUp');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        element.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 
 
 
