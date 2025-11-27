@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام التكييف المركزي - أيوان الحجاز</title>
+    <title>الأسئلة الشائعة - أيوان الحجاز</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -15,90 +15,87 @@
             font-family: 'Cairo', sans-serif;
         }
         
-        .image-container {
-            position: relative;
+        .faq-card {
+            background: white;
             border-radius: 20px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f0f0f0;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
         }
         
-        .image-container:hover {
+        .faq-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
             transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
         
-        .image-container img {
-            transition: transform 0.6s ease;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .image-container:hover img {
-            transform: scale(1.05);
-        }
-        
-        .feature-list li {
+        .faq-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             transition: all 0.3s ease;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
         }
         
-        .feature-list li:hover {
+        .faq-header:hover {
             background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            transform: translateX(-5px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+            border-bottom-color: #3b82f6;
         }
         
-        .feature-icon {
-            width: 50px;
-            height: 50px;
+        .faq-header.active {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+        }
+        
+        .faq-question {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin: 0;
+            flex: 1;
+            padding-left: 1rem;
+        }
+        
+        .faq-icon {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 1rem;
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            color: white;
-            font-size: 1.25rem;
+            background: white;
+            color: #3b82f6;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
         
-        .feature-list li:hover .feature-icon {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        .faq-header.active .faq-icon {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: rotate(180deg);
         }
         
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .faq-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: white;
         }
         
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .faq-content.active {
+            padding: 2rem;
+            max-height: 500px;
         }
         
-        .animate-fadeInLeft {
-            animation: fadeInLeft 0.8s ease-out forwards;
-        }
-        
-        .animate-fadeInRight {
-            animation: fadeInRight 0.8s ease-out forwards;
+        .faq-answer {
+            color: #6b7280;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin: 0;
         }
         
         .gradient-text {
@@ -107,23 +104,25 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .contact-badge {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .contact-badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
         
         .floating-element {
             animation: float 6s ease-in-out infinite;
@@ -134,136 +133,172 @@
             50% { transform: translateY(-10px); }
         }
         
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
+        .contact-bubble {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: #10b981;
-            animation: pulse 2s infinite;
-            display: inline-block;
-            margin-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        .contact-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
         }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-    <!-- قسم نظام التكييف المركزي -->
+    <!-- قسم الأسئلة الشائعة -->
     <section class="py-16 md:py-24 bg-white">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
+            
+            <!-- العنوان الرئيسي -->
+            <div class="text-center mb-16 opacity-0 animate-fadeInUp">
+                <div class="inline-block mb-6">
+                    <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg">
+                        <i class="fas fa-question-circle ml-3"></i>
+                        الأسئلة الشائعة
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    الأسئلة الشائعة عن 
+                    <span class="gradient-text">مكيفات جدة</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    إجابات على أكثر الأسئلة شيوعًا حول تركيب وصيانة المكيفات في جدة
+                </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mt-8 rounded-full"></div>
+            </div>
+
+            <!-- شبكة الأسئلة -->
+            <div class="max-w-4xl mx-auto">
                 
-              
-
-                <!-- القسم الثاني: النص -->
-                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInLeft" dir="rtl">
-                    <div class="mb-6">
-                        <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">
-                            الحل الأمثل
-                        </span>
+                <!-- السؤال الأول -->
+                <div class="faq-card opacity-0 animate-fadeInUp stagger-1">
+                    <div class="faq-header" onclick="toggleFAQ(1)">
+                        <h3 class="faq-question">ما هي أفضل أنواع المكيفات المناسبة لمناخ جدة؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
-                    
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
-                        نظام تكييف مركزي احترافي 
-                        <span class="gradient-text">يناسب الجميع</span>
-                    </h2>
-                    
-                    <p class="text-xl text-gray-600 leading-relaxed mb-8">
-                        <strong class="text-blue-600">شركة أيوان الحجاز</strong> تقدم حلولًا متكاملة لتوريد وتركيب أنظمة التكييف المركزي بجدة. نحن
-                        نضمن أعلى جودة باستخدام أفضل المواد وأسعار تنافسية تناسب الجميع.
-                    </p>
-
-                    <ul class="feature-list space-y-4 mb-8">
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">توريد وتركيب التكييف المركزي</h4>
-                                <p class="text-gray-600 text-sm">(كونسيلد، تشيلر، VRV) بأحدث التقنيات</p>
-                            </div>
-                        </li>
-                        
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">تنفيذ مشاريع متكاملة</h4>
-                                <p class="text-gray-600 text-sm">مع خدمات العزل وتركيب الدكت المتكاملة</p>
-                            </div>
-                        </li>
-                        
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">خطط صيانة دورية</h4>
-                                <p class="text-gray-600 text-sm">مصممة خصيصًا لتتناسب مع جميع الاحتياجات</p>
-                            </div>
-                        </li>
-                        
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">عروض مذهلة طوال العام</h4>
-                                <p class="text-gray-600 text-sm">خصومات حصرية على كافة خدماتنا</p>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="space-y-6">
-                        <p class="text-gray-600 text-lg leading-relaxed">
-                            تواصل معنا الآن للاستفادة من أفضل خدمات التكييف المركزي سواء للمنزل أو المشاريع التجارية.
+                    <div class="faq-content" id="faq-content-1">
+                        <p class="faq-answer">
+                            المكيفات المركزية والسبليت موفرة الطاقة هي الأفضل لمناخ جدة الحار. تتميز هذه الأنواع بكفاءة
+                            التبريد العالية والقدرة على التعامل مع درجات الحرارة المرتفعة، كما توفر استهلاك الطاقة وتضمن
+                            توزيعًا متجانسًا للهواء البارد في جميع أنحاء المكان.
                         </p>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                            <a href="tel:0596678717" class="contact-badge">
-                                <i class="fas fa-phone-alt"></i>
-                                <span>اتصل بنا: 0596678717</span>
-                            </a>
-                            
-                            <a href="https://wa.me/966596678717" class="contact-badge" style="background: linear-gradient(135deg, #25d366, #128c7e);">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>راسلنا على الواتساب</span>
-                            </a>
-                        </div>
-                        
-                        <div class="flex items-center text-green-600 font-medium">
-                            <span class="pulse-dot"></span>
-                            <span class="mr-2">متاحون للرد على استفساراتك 24/7</span>
-                        </div>
                     </div>
                 </div>
 
-                  <!-- القسم الأول: الصورة -->
-                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInRight">
-                    <div class="image-container">
-                        <img class="w-full h-[500px]" src="./images/Artboard 4.avif" alt="أفضل خدمات التكييف المركزي">
-                        <!-- عناصر زخرفية -->
-                        <div class="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg">
-                            <i class="fas fa-star mr-2"></i>الأفضل في جدة
+                <!-- السؤال الثاني -->
+                <div class="faq-card opacity-0 animate-fadeInUp stagger-2">
+                    <div class="faq-header" onclick="toggleFAQ(2)">
+                        <h3 class="faq-question">كم تكلفة تركيب مكيف مركزي في جدة؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div class="absolute bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg floating-element">
-                            <i class="fas fa-bolt mr-2"></i>كفاءة عالية
+                    </div>
+                    <div class="faq-content" id="faq-content-2">
+                        <p class="faq-answer">
+                            تتراوح تكلفة تركيب المكيف المركزي في جدة حسب مساحة المبنى وتعقيد التركيب والماركة المستخدمة.
+                            نقدم دراسة مجانية لتحديد التكلفة الدقيقة مع ضمان أفضل الأسعار وجودة التصنيع والتركيب.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- السؤال الثالث -->
+                <div class="faq-card opacity-0 animate-fadeInUp stagger-3">
+                    <div class="faq-header" onclick="toggleFAQ(3)">
+                        <h3 class="faq-question">كم مرة يجب صيانة المكيف سنويًا؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
                         </div>
+                    </div>
+                    <div class="faq-content" id="faq-content-3">
+                        <p class="faq-answer">
+                            يُنصح بإجراء صيانة دورية للمكيف مرتين سنويًا، مرة قبل موسم الصيف ومرة بعده للحفاظ على كفاءة
+                            التشغيل وإطالة عمر الجهاز. كما ننصح بالفحص الدوري كل 3 أشهر في المناطق ذات الاستخدام المكثف.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- السؤال الرابع -->
+                <div class="faq-card opacity-0 animate-fadeInUp stagger-4">
+                    <div class="faq-header" onclick="toggleFAQ(4)">
+                        <h3 class="faq-question">ما هي مميزات المكيفات موفرة الطاقة؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-content" id="faq-content-4">
+                        <p class="faq-answer">
+                            المكيفات موفرة الطاقة توفر تكاليف الكهرباء بنسبة تصل إلى 50٪، وتساعد على تقليل الاستهلاك
+                            الكهربائي مع الحفاظ على برودة عالية الجودة. كما تتميز بعمر افتراضي أطول وتقليل الانبعاثات الكربونية.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- سؤال إضافي -->
+                <div class="faq-card opacity-0 animate-fadeInUp">
+                    <div class="faq-header" onclick="toggleFAQ(5)">
+                        <h3 class="faq-question">هل تقدمون ضمان على خدمات التركيب والصيانة؟</h3>
+                        <div class="faq-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-content" id="faq-content-5">
+                        <p class="faq-answer">
+                            نعم، نقدم ضمانًا شاملاً على جميع خدماتنا يشمل:
+                            <br>• ضمان 10 سنوات على أعمال الدكت
+                            <br>• ضمان 10 سنوات على تمديدات النحاس
+                            <br>• ضمان شامل ضد التسريب
+                            <br>• صيانة دورية مجانية خلال فترة الضمان
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- قسم الاتصال -->
+            <div class="text-center mt-16 opacity-0 animate-fadeInUp">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl p-8 text-white shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-4">لم تجد إجابة لسؤالك؟</h3>
+                    <p class="text-blue-100 mb-6 text-lg">فريق الدعم الفني لدينا جاهز للإجابة على جميع استفساراتك</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="https://wa.me/966596678717" class="bg-white text-blue-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors">
+                            <i class="fab fa-whatsapp ml-2"></i>
+                            تواصل عبر واتساب
+                        </a>
+                        <a href="tel:0596678717" class="bg-green-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-green-600 transition-colors">
+                            <i class="fas fa-phone ml-2"></i>
+                            اتصل بنا الآن
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- فقاعة الاتصال العائمة -->
+    <a href="https://wa.me/966596678717" class="contact-bubble floating-element">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script>
-        // تفعيل الأنيميشنات عند التمرير للقسم
+        // تفعيل الأنيميشنات عند التمرير
         document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.animate-fadeInLeft, .animate-fadeInRight');
+            const animatedElements = document.querySelectorAll('.animate-fadeInUp');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -278,6 +313,29 @@
                 observer.observe(element);
             });
         });
+
+        // وظيفة تبديل الأسئلة
+        function toggleFAQ(number) {
+            const content = document.getElementById(`faq-content-${number}`);
+            const header = content.previousElementSibling;
+            
+            // إغلاق جميع الأسئلة الأخرى
+            document.querySelectorAll('.faq-content').forEach(item => {
+                if (item.id !== `faq-content-${number}`) {
+                    item.classList.remove('active');
+                    item.previousElementSibling.classList.remove('active');
+                }
+            });
+            
+            // تبديل السؤال الحالي
+            content.classList.toggle('active');
+            header.classList.toggle('active');
+        }
+
+        // فتح السؤال الأول تلقائياً
+        setTimeout(() => {
+            toggleFAQ(1);
+        }, 1000);
     </script>
 </body>
 </html>
