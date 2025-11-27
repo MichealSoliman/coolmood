@@ -566,6 +566,176 @@
             -webkit-text-fill-color: transparent;
         }
     </style>
+    <!-- قسم مواصفات الدكت -->
+       <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .spec-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            background-size: cover;
+            background-position: center;
+            height: 280px;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        .spec-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+        
+        .spec-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* تأثير Scale على الصورة */
+        .spec-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1);
+            transition: transform 0.6s ease;
+            z-index: 0;
+        }
+        
+        .spec-card:hover::after {
+            transform: scale(1.1);
+        }
+        
+        .spec-card:hover::before {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem;
+            color: white;
+            width: 100%;
+            text-align: start;
+            transform: translateY(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .spec-card:hover .card-content {
+            transform: translateY(-5px);
+        }
+        
+        .icon-wrapper {
+            background: rgba(255,255,255,0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            margin-bottom: 1rem;
+            margin-right: 5px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+        
+        .spec-card:hover .icon-wrapper {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        .stagger-7 { animation-delay: 0.7s; }
+        .stagger-8 { animation-delay: 0.8s; }
+        .stagger-9 { animation-delay: 0.9s; }
+        
+        .gradient-btn {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .gradient-btn:hover::before {
+            left: 100%;
+        }
+        
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        /* تأثير إضافي للنص */
+        .spec-card h3 {
+            transition: all 0.3s ease;
+        }
+        
+        .spec-card:hover h3 {
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .spec-card p {
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+        
+        .spec-card:hover p {
+            opacity: 1;
+            transform: translateY(2px);
+        }
+    </style>
 
 </head>
 
@@ -1028,129 +1198,164 @@
 
 
     <!-- بداية قسم نبذة تعريفية عن الشركة -->
-    <section class="duct-specs py-5" dir="rtl" id="duct-specifications" itemscope itemtype="http://schema.org/Service"
-        style="background: linear-gradient(to bottom, #123456, #0a0a0a); color: #fff;">
-        <div class="container">
-            <header class="text-center mb-5">
-                <h2 class="display-5 fw-bold text-white mb-3" itemprop="name"
-                    style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+       <!-- قسم مواصفات الدكت -->
+    <section class="py-16 md:py-24 relative overflow-hidden" dir="rtl" id="duct-specifications" itemscope itemtype="http://schema.org/Service"
+             style="background: linear-gradient(135deg, #0c1a2d 0%, #1a3a5f 50%, #0c1a2d 100%);">
+        
+        <!-- عناصر زخرفية خلفية -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full -translate-y-1/2 translate-x-1/2 opacity-10"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-green-500 rounded-full translate-y-1/2 -translate-x-1/2 opacity-10"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <header class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4" itemprop="name">
                     نوعية الدكت المعتمد ومواصفاته
                 </h2>
-                <p class="lead text-white-50" itemprop="description" style="max-width: 800px; margin: 0 auto;">
-                    مواصفات عالية الجودة تضمن أداءً مثاليًا ومتانة فائقة
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto" itemprop="description">
+                    مواصفات عالية الجودة تضمن أداءً مثاليًا ومتانة فائقة لأنظمة التكييف الخاصة بك
                 </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-green-400 to-blue-400 mx-auto mt-6 rounded-full"></div>
             </header>
 
-            <div class="specs-grid"
-                style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-                <article class="spec-card" itemprop="hasOfferCatalog"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- البطاقة 1 -->
+                <article class="spec-card animate-card stagger-1 opacity-0" itemprop="hasOfferCatalog"
+                         style="background-image: url('./images/galvanized-sheet-metal.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-fire fa-2x" style="color: #ff5722;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-fire fa-lg" style="color: #ff5722;"></i>
                         </div>
-                        <h3 class="h5">صاج مجلفن ضد الحريق</h3>
-                        <p>سماكة 0.6 سعودي لضمان الأمان والسلامة.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">صاج مجلفن ضد الحريق</h3>
+                        <p class="text-blue-100">سماكة 0.6 سعودي لضمان الأمان والسلامة.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 2 -->
+                <article class="spec-card animate-card stagger-2 opacity-0"
+                         style="background-image: url('./images/duct-fo-kitchens.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-bath fa-2x" style="color: #03a9f4;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-bath fa-lg" style="color: #03a9f4;"></i>
                         </div>
-                        <h3 class="h5">دكت للمطابخ والحمامات</h3>
-                        <p>دكت ميت TDC فالنجات 0.6 للمطابخ والمناطق المخصصة للتدخين والحمامات.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">دكت للمطابخ والحمامات</h3>
+                        <p class="text-blue-100">دكت ميت TDC فالنجات 0.6 للمطابخ والمناطق المخصصة للتدخين والحمامات.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 3 -->
+                <article class="spec-card animate-card stagger-3 opacity-0"
+                         style="background-image: url('./images/technical-factory-manufacturing.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-cogs fa-2x" style="color: #8bc34a;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-cogs fa-lg" style="color: #8bc34a;"></i>
                         </div>
-                        <h3 class="h5">تصنيع مصنع فني</h3>
-                        <p>تصنيع وفق أعلى معايير الجودة واليقظة لضمان أفضل أداء.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">تصنيع مصنع فني</h3>
+                        <p class="text-blue-100">تصنيع وفق أعلى معايير الجودة واليقظة لضمان أفضل أداء.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 4 -->
+                <article class="spec-card animate-card stagger-4 opacity-0"
+                         style="background-image: url('./images/external-insulation.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-shield-alt fa-2x" style="color: #fbc02d;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-shield-alt fa-lg" style="color: #fbc02d;"></i>
                         </div>
-                        <h3 class="h5">العزل الخارجي الكامل</h3>
-                        <p>إيمكو Emco 24 مم (1 بوصة) مع غراء أخضر للعزل الخارجي.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">العزل الخارجي الكامل</h3>
+                        <p class="text-blue-100">إيمكو Emco 24 مم (1 بوصة) مع غراء أخضر للعزل الخارجي.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 5 -->
+                <article class="spec-card animate-card stagger-5 opacity-0"
+                         style="background-image: url('./images/internal-insulation.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-water fa-2x" style="color: #00bcd4;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-water fa-lg" style="color: #00bcd4;"></i>
                         </div>
-                        <h3 class="h5">العزل الداخلي ضد الرطوبة</h3>
-                        <p>العزل الداخلي 9 م أمريكي مانع للرطوبة وكاتم للصوت.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">العزل الداخلي ضد الرطوبة</h3>
+                        <p class="text-blue-100">العزل الداخلي 9 م أمريكي مانع للرطوبة وكاتم للصوت.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 6 -->
+                <article class="spec-card animate-card stagger-6 opacity-0"
+                         style="background-image: url('./images/luxurious-installation.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-wrench fa-2x" style="color: #ff9800;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-wrench fa-lg" style="color: #ff9800;"></i>
                         </div>
-                        <h3 class="h5">التركيب الفاخر</h3>
-                        <p>حزام تايواني مع كلبسات تايواني كل 30 سم لضمان الثبات والمتانة.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">التركيب الفاخر</h3>
+                        <p class="text-blue-100">حزام تايواني مع كلبسات تايواني كل 30 سم لضمان الثبات والمتانة.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 7 -->
+                <article class="spec-card animate-card stagger-7 opacity-0"
+                         style="background-image: url('./images/connection-sheet.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-cogs fa-2x" style="color: #8bc34a;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-cogs fa-lg" style="color: #8bc34a;"></i>
                         </div>
-                        <h3 class="h5">الصاج الكونيكشن</h3>
-                        <p>سماكة 0.8 مع العزل الكامل لضمان الأداء المثالي.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">الصاج الكونيكشن</h3>
+                        <p class="text-blue-100">سماكة 0.8 مع العزل الكامل لضمان الأداء المثالي.</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 8 -->
+                <article class="spec-card animate-card stagger-8 opacity-0"
+                         style="background-image: url('./images/flexible.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-ventilator fa-2x" style="color: #607d8b;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-fan fa-lg" style="color: #607d8b;"></i>
                         </div>
-                        <h3 class="h5">الفليكسبل</h3>
-                        <p>فليكسبل 8 بوصة سوبر فليكس المستورد (لدى شركة مريم).</p>
+                        <h3 class="text-xl text-white font-bold mb-2">الفليكسبل</h3>
+                        <p class="text-blue-100">فليكسبل 8 بوصة سوبر فليكس المستورد (لدى شركة مريم).</p>
                     </div>
                 </article>
 
-                <article class="spec-card"
-                    style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; text-align: center; transition: transform 0.3s;">
+                <!-- البطاقة 9 -->
+                <article class="spec-card animate-card stagger-9 opacity-0"
+                         style="background-image: url('./images/smoke-test.jpeg');">
                     <div class="card-content">
-                        <div class="icon-wrapper" style="margin-bottom: 1rem;">
-                            <i class="fas fa-check-circle fa-2x" style="color: #4caf50;"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-check-circle fa-lg" style="color: #4caf50;"></i>
                         </div>
-                        <h3 class="h5">اختبار الدخان</h3>
-                        <p>إجراء اختبار دخان لكامل المشروع بعد التنفيذ لضمان الجودة.</p>
+                        <h3 class="text-xl text-white font-bold mb-2">اختبار الدخان</h3>
+                        <p class="text-blue-100">إجراء اختبار دخان لكامل المشروع بعد التنفيذ لضمان الجودة.</p>
                     </div>
                 </article>
             </div>
 
-            <div class="text-center mt-5">
-                <a href="tel:0596678717" class="btn btn-lg"
-                    style="background: #4caf50; color: #fff; padding: 0.75rem 2rem; border-radius: 25px; text-decoration: none; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
-                    تواصل معنا
+            <div class="text-center mt-12">
+                <a href="tel:0596678717" class="gradient-btn inline-block text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg">
+                    <i class="fas fa-phone-alt ml-2"></i>
+                    تواصل معنا الآن
                 </a>
             </div>
         </div>
     </section>
+
+    <script>
+        // تفعيل الأنيميشنات عند التمرير للقسم
+        document.addEventListener('DOMContentLoaded', function() {
+            const section = document.getElementById('duct-specifications');
+            const cards = section.querySelectorAll('.animate-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        element.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 
     <!-- نهاية قسم نبذة تعريفية عن الشركة -->
 
