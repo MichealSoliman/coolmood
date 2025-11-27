@@ -850,6 +850,154 @@
             transform: scale(1.05);
         }
     </style>
+    <!-- قسم مواصفات النحاس -->
+         <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .copper-card {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .copper-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #b8860b, #ffd700, #daa520);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .copper-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .copper-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(184, 134, 11, 0.15);
+        }
+        
+        .copper-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            background: linear-gradient(135deg, #fef9e7, #fcf3cf);
+            border: 2px solid #f7dc6f;
+        }
+        
+        .copper-icon::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            bottom: -4px;
+            left: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .copper-card:hover .copper-icon::after {
+            opacity: 1;
+        }
+        
+        .copper-icon i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #b8860b, #daa520);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .copper-card:hover .copper-icon i {
+            background: linear-gradient(135deg, #fff, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-card {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        .stagger-7 { animation-delay: 0.7s; }
+        .stagger-8 { animation-delay: 0.8s; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #b8860b, #daa520, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .copper-badge {
+            background: linear-gradient(135deg, #b8860b, #daa520);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+        }
+        
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffd700, transparent);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .copper-card:hover .particle {
+            opacity: 0.6;
+        }
+    </style>
 
 </head>
 
@@ -1611,113 +1759,204 @@
 
 
     <!-- إضافة قسم النوعية والمواصفات -->
-    <section class="copper-specs py-5" id="copper-specifications" dir="rtl"
-        style="background: linear-gradient(to bottom, #0a0a0a, #123456); color: #fff;">
-        <div class="container mt-5">
-            <div class="text-center mb-5">
-                <h2 class="display-4 fw-bold mb-4 text-light"
-                    style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); color: #fff;">
-                    نوعية النحاس المعتمد ومواصفاته
+    <!-- قسم مواصفات النحاس -->
+    <section class="py-16 md:py-24 bg-gradient-to-br from-amber-50 to-orange-50 relative overflow-hidden" id="copper-specifications" dir="rtl">
+        
+        <!-- عناصر زخرفية خلفية -->
+        <div class="absolute top-10 right-10 w-32 h-32 bg-amber-200 rounded-full opacity-20 floating-element"></div>
+        <div class="absolute bottom-20 left-20 w-40 h-40 bg-orange-200 rounded-full opacity-30 floating-element" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-200 rounded-full opacity-25 floating-element" style="animation-delay: 4s;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- العنوان الرئيسي -->
+            <div class="text-center mb-16">
+                <div class="inline-block mb-4">
+                    <span class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
+                        <i class="fas fa-gem ml-2"></i>
+                        الجودة المتميزة
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    نوعية <span class="gradient-text">النحاس المعتمد</span> ومواصفاته
                 </h2>
-                <p class="lead text-white-50" style="max-width: 800px; margin: 0 auto; color: #fff;">
-                    نقدم لكم مجموعة من المواصفات عالية الجودة التي تضمن الأداء الأمثل في أنظمة التكييف والتمديدات
-                    الكهربائية.
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    نقدم لكم مجموعة من المواصفات عالية الجودة التي تضمن الأداء الأمثل في أنظمة التكييف والتمديدات الكهربائية
                 </p>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto mt-8 rounded-full"></div>
             </div>
 
-            <!-- Grid Layout -->
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                <!-- Specification Cards -->
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-cogs fa-3x text-warning"></i>
-                        </div>
-                        <h3 class="h5 mb-3">نحاس مولر أمريكي</h3>
-                        <p>استخدام نحاس عالي الجودة بقياسات دقيقة لأنظمة التكييف لضمان الكفاءة والمتانة.</p>
-                    </article>
+            <!-- شبكة البطاقات -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- بطاقة 1 -->
+                <div class="copper-card animate-card stagger-1 opacity-0">
+                    <div class="copper-badge">الأساسي</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">نحاس مولر أمريكي</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        استخدام نحاس عالي الجودة بقياسات دقيقة لأنظمة التكييف لضمان الكفاءة والمتانة.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-shield-alt fa-3x text-info"></i>
-                        </div>
-                        <h3 class="h5 mb-3">عازل خارجي مانع للرطوبة</h3>
-                        <p>عوازل متطورة تحمي الأنابيب من الرطوبة لتحسين كفاءة النظام.</p>
-                    </article>
+                <!-- بطاقة 2 -->
+                <div class="copper-card animate-card stagger-2 opacity-0">
+                    <div class="copper-badge">الحماية</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">عازل خارجي مانع للرطوبة</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        عوازل متطورة تحمي الأنابيب من الرطوبة لتحسين كفاءة النظام ومنع التآكل.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-tape fa-3x text-success"></i>
-                        </div>
-                        <h3 class="h5 mb-3">شطرطون تايواني أسود</h3>
-                        <p>استخدام شطرطون معتمد لضمان تثبيت مثالي وتحسين جودة التمديدات.</p>
-                    </article>
+                <!-- بطاقة 3 -->
+                <div class="copper-card animate-card stagger-3 opacity-0">
+                    <div class="copper-badge">التثبيت</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-tape"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">شطرطون تايواني أسود</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        استخدام شطرطون معتمد لضمان تثبيت مثالي وتحسين جودة التمديدات ومقاومة العوامل الجوية.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-plug fa-3x text-danger"></i>
-                        </div>
-                        <h3 class="h5 mb-3">تمديد أسلاك الفنار</h3>
-                        <p>تمديد أسلاك عالية الجودة لضمان أمان وكفاءة النظام الكهربائي.</p>
-                    </article>
+                <!-- بطاقة 4 -->
+                <div class="copper-card animate-card stagger-4 opacity-0">
+                    <div class="copper-badge">الكهرباء</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">تمديد أسلاك الفنار</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        تمديد أسلاك عالية الجودة لضمان أمان وكفاءة النظام الكهربائي مع الحماية من التسربات.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-wrench fa-3x text-primary"></i>
-                        </div>
-                        <h3 class="h5 mb-3">قياس فعلي بعد التمديد</h3>
-                        <p>التأكد من القياسات النهائية لضمان الدقة وتفادي الأخطاء.</p>
-                    </article>
+                <!-- بطاقة 5 -->
+                <div class="copper-card animate-card stagger-5 opacity-0">
+                    <div class="copper-badge">الدقة</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">قياس فعلي بعد التمديد</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        التأكد من القياسات النهائية لضمان الدقة وتفادي الأخطاء وتحقيق التماثل في التمديدات.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-spray-can fa-3x text-warning"></i>
-                        </div>
-                        <h3 class="h5 mb-3">عزل خارجي كامل</h3>
-                        <p>توفير عزل خارجي كامل باستخدام أفضل المواد لضمان الأداء الأمثل.</p>
-                    </article>
+                <!-- بطاقة 6 -->
+                <div class="copper-card animate-card stagger-6 opacity-0">
+                    <div class="copper-badge">العزل</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-spray-can"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">عزل خارجي كامل</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        توفير عزل خارجي كامل باستخدام أفضل المواد لضمان الأداء الأمثل وتوفير الطاقة.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-cut fa-3x text-info"></i>
-                        </div>
-                        <h3 class="h5 mb-3">قص التمديدات بالحوائط</h3>
-                        <p>استخدام أدوات حديثة ودقيقة لقص التمديدات بدون تأثير على البنية.</p>
-                    </article>
+                <!-- بطاقة 7 -->
+                <div class="copper-card animate-card stagger-7 opacity-0">
+                    <div class="copper-badge">الهندسة</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">قص التمديدات بالحوائط</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        استخدام أدوات حديثة ودقيقة لقص التمديدات بدون تأثير على البنية الإنشائية للمباني.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
                 </div>
 
-                <div class="col">
-                    <article class="card h-100 text-center border-0 shadow-sm p-4"
-                        style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; transition: transform 0.3s;">
-                        <div class="icon mb-3">
-                            <i class="fas fa-tools fa-3x text-success"></i>
+                <!-- بطاقة 8 -->
+                <div class="copper-card animate-card stagger-8 opacity-0">
+                    <div class="copper-badge">الأدوات</div>
+                    <div class="copper-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-4">أدوات صحية عالية الجودة</h3>
+                    <p class="text-gray-600 text-center leading-relaxed">
+                        استخدام أفضل الأدوات الصحية لتحسين الأداء العام للنظام وضمان السلامة والصحة.
+                    </p>
+                    <div class="particle w-4 h-4 top-4 right-4"></div>
+                    <div class="particle w-3 h-3 bottom-4 left-4" style="animation-delay: 0.5s;"></div>
+                </div>
+            </div>
+
+            <!-- قسم إضافي للمعلومات -->
+            <div class="mt-16 bg-white rounded-2xl shadow-xl p-8 border border-amber-100">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">لماذا نستخدم النحاس الأمريكي؟</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                                موصلية حرارية وكهربائية فائقة
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                                مقاومة عالية للتآكل والصدا
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                                متانة وقوة تحمل طويلة الأمد
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                                مرونة وسهولة في التشكيل والتركيب
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex-1 text-center">
+                        <div class="bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl p-6 text-white shadow-lg">
+                            <i class="fas fa-award text-4xl mb-4"></i>
+                            <h4 class="text-xl font-bold mb-2">ضمان الجودة</h4>
+                            <p class="text-amber-100">جميع منتجاتنا تحمل شهادات الجودة العالمية</p>
                         </div>
-                        <h3 class="h5 mb-3">أدوات صحية عالية الجودة</h3>
-                        <p>استخدام أفضل الأدوات الصحية لتحسين الأداء العام للنظام.</p>
-                    </article>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // تفعيل الأنيميشنات عند التمرير للقسم
+        document.addEventListener('DOMContentLoaded', function() {
+            const section = document.getElementById('copper-specifications');
+            const cards = section.querySelectorAll('.animate-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        element.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
 
 
 
