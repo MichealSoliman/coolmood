@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ضمان أيوان الحجاز</title>
+    <title>خدمات التكييف - أيوان الحجاز</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -15,97 +15,145 @@
             font-family: 'Cairo', sans-serif;
         }
         
-        .warranty-card {
+        .service-card {
             position: relative;
-            background: white;
-            border-radius: 24px;
-            padding: 2.5rem;
-            transition: all 0.5s ease;
+            border-radius: 20px;
             overflow: hidden;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            background: white;
         }
         
-        .warranty-card::before {
-            content: '';
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .service-card:hover .image-container img {
+            transform: scale(1.1);
+        }
+        
+        .image-overlay {
             position: absolute;
             top: 0;
             right: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #10b981, #3b82f6, #f59e0b);
-            transform: scaleX(0);
-            transition: transform 0.5s ease;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
         }
         
-        .warranty-card:hover::before {
-            transform: scaleX(1);
+        .service-card:hover .image-overlay {
+            opacity: 1;
         }
         
-        .warranty-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        .service-content {
+            padding: 1.5rem;
+            background: white;
         }
         
-        .warranty-icon {
-            position: relative;
-            width: 120px;
-            height: 120px;
+        .service-icon {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            border: 3px solid #e2e8f0;
-            transition: all 0.4s ease;
-        }
-        
-        .warranty-card:hover .warranty-icon {
-            transform: scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .warranty-icon i {
-            font-size: 3rem;
-            transition: all 0.4s ease;
-        }
-        
-        .warranty-badge {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            margin-left: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .service-title {
+            font-size: 1.25rem;
             font-weight: bold;
-            font-size: 1.1rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .service-card:hover .service-title {
+            color: #3b82f6;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .action-buttons {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-call {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .btn-call:hover {
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-            z-index: 10;
-        }
-        
-        .warranty-badge.warning {
-            background: linear-gradient(135deg, #d97706, #f59e0b);
-        }
-        
-        .warranty-badge.success {
-            background: linear-gradient(135deg, #059669, #10b981);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
         }
         
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(40px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -118,221 +166,219 @@
         }
         
         .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.3s; }
-        .stagger-3 { animation-delay: 0.5s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
         
         .gradient-text {
-            background: linear-gradient(135deg, #1e40af, #3b82f6, #10b981);
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        .feature-list li {
-            transition: all 0.3s ease;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .feature-list li:hover {
-            transform: translateX(-5px);
-            background: #f8fafc;
-            border-radius: 8px;
-            padding-right: 1rem;
-        }
-        
-        .pulse-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-        
-        .guarantee-stamp {
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            transform: rotate(-15deg);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-            opacity: 0.9;
-        }
-        
-        .guarantee-stamp::after {
-            content: 'مضمون';
-            font-size: 1.2rem;
-        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 via-white to-green-50">
-    <!-- قسم الضمان -->
-    <section class="py-16 md:py-24 relative overflow-hidden" id="warranty" dir="rtl">
-        
-        <!-- عناصر زخرفية خلفية -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full -translate-y-1/2 translate-x-1/2 opacity-20 floating-element"></div>
-        <div class="absolute bottom-0 left-0 w-80 h-80 bg-green-200 rounded-full translate-y-1/2 -translate-x-1/2 opacity-20 floating-element" style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/2 left-1/3 w-32 h-32 bg-amber-200 rounded-full opacity-30 floating-element" style="animation-delay: 4s;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
+<body class="bg-gray-50">
+    <!-- قسم الخدمات -->
+    <section class="py-16 md:py-24" dir="rtl">
+        <div class="container mx-auto px-4">
             <!-- العنوان الرئيسي -->
             <div class="text-center mb-16">
-                <div class="inline-block mb-6">
-                    <span class="bg-gradient-to-r from-blue-500 to-green-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg">
-                        <i class="fas fa-shield-alt ml-3"></i>
-                        ضمان الجودة
-                    </span>
-                </div>
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                    ضمان شامل يمتد لـ <span class="gradient-text">10 سنوات</span>
+                    نقدم خدمات احترافية <span class="gradient-text">للتكييف والتدفئة</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                    نقدم أفضل ضمان في السوق لنؤكد ثقتنا في جودة خدماتنا ونسعى دائمًا لتحقيق رضاكم التام
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    اكتشف مجموعة خدماتنا المتكاملة التي نقدمها بأعلى معايير الجودة والاحترافية
                 </p>
-                <div class="flex justify-center items-center mt-8 space-x-4 space-x-reverse">
-                    <div class="pulse-dot bg-green-500"></div>
-                    <span class="text-green-600 font-medium">خدمة عملاء متاحة 24/7</span>
-                </div>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto mt-8 rounded-full"></div>
             </div>
 
-            <!-- شبكة بطاقات الضمان -->
+            <!-- شبكة الخدمات -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- بطاقة ضمان أعمال الدكت -->
-                <div class="warranty-card animate-card stagger-1 opacity-0">
-                    <div class="warranty-badge success">10 سنوات</div>
-                    <div class="warranty-icon" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-color: #10b981;">
-                        <i class="fas fa-tools text-green-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">ضمان أعمال الدكت</h3>
-                    <ul class="feature-list space-y-3">
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">ضمان شامل على التركيبات والتنفيذ</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">صيانة دورية مجانية لمدة 10 سنوات</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">فحص وتنظيف شامل كل 6 أشهر</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">استبدال القطع التالفة بدون تكلفة</span>
-                        </li>
-                    </ul>
-                    <div class="guarantee-stamp"></div>
-                </div>
-
-                <!-- بطاقة ضمان تمديدات النحاس -->
-                <div class="warranty-card animate-card stagger-2 opacity-0">
-                    <div class="warranty-badge">10 سنوات</div>
-                    <div class="warranty-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #3b82f6;">
-                        <i class="fas fa-cogs text-blue-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">ضمان تمديدات النحاس</h3>
-                    <ul class="feature-list space-y-3">
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">فحص الضغط والفاكيوم الدوري</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">جودة التركيب المضمونة والمعتمدة</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">استخدام نحاس مولر الأمريكي الأصلي</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">مراقبة مستمرة لأداء النظام</span>
-                        </li>
-                    </ul>
-                    <div class="guarantee-stamp" style="background: linear-gradient(135deg, #3b82f6, #1e40af);"></div>
-                </div>
-
-                <!-- بطاقة ضمان ضد التسريب -->
-                <div class="warranty-card animate-card stagger-3 opacity-0">
-                    <div class="warranty-badge warning">حماية شاملة</div>
-                    <div class="warranty-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #f59e0b;">
-                        <i class="fas fa-shield-alt text-amber-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">ضمان ضد التسريب</h3>
-                    <ul class="feature-list space-y-3">
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">استبدال فوري للنحاس المعيب</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">معالجة سريعة خلال 24 ساعة</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">تعويض عن أي أضرار ناتجة</span>
-                        </li>
-                        <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">فحص مجاني للأنظمة كل 3 أشهر</span>
-                        </li>
-                    </ul>
-                    <div class="guarantee-stamp" style="background: linear-gradient(135deg, #f59e0b, #d97706);"></div>
-                </div>
-            </div>
-
-            <!-- قسم معلومات إضافية -->
-            <div class="mt-16 bg-white rounded-3xl shadow-xl p-8 border border-blue-100">
-                <div class="flex flex-col lg:flex-row items-center gap-8">
-                    <div class="flex-1">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">لماذا نقدم أطول فترة ضمان في السوق؟</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            ثقتنا في جودة موادنا وخبرة فريقنا تمكننا من تقديم ضمان ممتد لـ 10 سنوات، 
-                            لأننا نؤمن بأن الجودة الحقيقية تثبت نفسها مع مرور الوقت.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-medal text-blue-500 ml-3 text-xl"></i>
-                                <span class="text-gray-700">جودة المواد المعتمدة</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-user-tie text-green-500 ml-3 text-xl"></i>
-                                <span class="text-gray-700">فريق فني متخصص</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-clipboard-check text-amber-500 ml-3 text-xl"></i>
-                                <span class="text-gray-700">مراقبة الجودة الشاملة</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-headset text-purple-500 ml-3 text-xl"></i>
-                                <span class="text-gray-700">دعم فني مستمر</span>
-                            </div>
+                <!-- خدمة 1 -->
+                <div class="service-card animate-card stagger-1 opacity-0">
+                    <div class="image-container">
+                        <img src="./images/(47).avif" alt="توريد وتركيب التكييف">
+                        <div class="image-overlay">
+                            <span class="text-white font-bold text-lg">توريد وتركيب التكييف</span>
                         </div>
                     </div>
-                    <div class="flex-1 text-center">
-                        <div class="bg-gradient-to-br from-blue-500 to-green-500 rounded-2xl p-8 text-white shadow-lg">
-                            <i class="fas fa-star text-4xl mb-4"></i>
-                            <h4 class="text-2xl font-bold mb-3">رضا العملاء</h4>
-                            <p class="text-blue-100 text-lg">98% من عملائنا يوصون بنا</p>
-                            <div class="mt-4 text-3xl font-bold">⭐ 4.9/5</div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="service-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3 class="service-title">توريد وتركيب التكييف</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            توريد وتركيب أنظمة التكييف بأحدث التقنيات وأعلى معايير الجودة
+                        </p>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/966596678717?text=مرحباً، أريد الاستفسار عن خدمات توريد وتركيب التكييف" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                واتساب
+                            </a>
+                            <a href="tel:0596678717" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                اتصل
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- خدمة 2 -->
+                <div class="service-card animate-card stagger-2 opacity-0">
+                    <div class="image-container">
+                        <img src="./images/(65).avif" alt="أنظمة التكييف المركزي">
+                        <div class="image-overlay">
+                            <span class="text-white font-bold text-lg">أنظمة التكييف المركزي</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="service-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3 class="service-title">أنظمة التكييف المركزي</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            تصميم وتنفيذ أنظمة التكييف المركزي للمباني والمنشآت الكبيرة
+                        </p>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/966596678717?text=مرحباً، أريد الاستفسار عن أنظمة التكييف المركزي" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                واتساب
+                            </a>
+                            <a href="tel:0596678717" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                اتصل
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- خدمة 3 -->
+                <div class="service-card animate-card stagger-3 opacity-0">
+                    <div class="image-container">
+                        <img src="./images/(64).avif" alt="خدمات الصيانة والإصلاح">
+                        <div class="image-overlay">
+                            <span class="text-white font-bold text-lg">خدمات الصيانة والإصلاح</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="service-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="service-title">خدمات الصيانة والإصلاح</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            صيانة دورية وإصلاح أعطال لأنظمة التكييف بفريق فني متخصص
+                        </p>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/966596678717?text=مرحباً، أريد الاستفسار عن خدمات الصيانة والإصلاح" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                واتساب
+                            </a>
+                            <a href="tel:0596678717" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                اتصل
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- خدمة 4 -->
+                <div class="service-card animate-card stagger-4 opacity-0">
+                    <div class="image-container">
+                        <img src="./images/(50).avif" alt="العزل وتركيب الدكت">
+                        <div class="image-overlay">
+                            <span class="text-white font-bold text-lg">العزل وتركيب الدكت</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="service-icon">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <h3 class="service-title">العزل وتركيب الدكت</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            أعمال العزل الحراري وتركيب أنظمة الدكت بأفضل المواد والمعايير
+                        </p>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/966596678717?text=مرحباً، أريد الاستفسار عن خدمات العزل وتركيب الدكت" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                واتساب
+                            </a>
+                            <a href="tel:0596678717" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                اتصل
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- خدمة 5 -->
+                <div class="service-card animate-card stagger-5 opacity-0">
+                    <div class="image-container">
+                        <img src="./images/(49).avif" alt="تركيب الوحدات الداخلية">
+                        <div class="image-overlay">
+                            <span class="text-white font-bold text-lg">تركيب الوحدات الداخلية</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="service-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3 class="service-title">تركيب الوحدات الداخلية</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            تركيب الوحدات الداخلية لأنظمة التكييف بدقة واحترافية عالية
+                        </p>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/966596678717?text=مرحباً، أريد الاستفسار عن تركيب الوحدات الداخلية" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                واتساب
+                            </a>
+                            <a href="tel:0596678717" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                اتصل
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- خدمة 6 -->
+                <div class="service-card animate-card stagger-6 opacity-0">
+                    <div class="image-container">
+                        <img src="./images/(20).avif" alt="الفحص السنوي">
+                        <div class="image-overlay">
+                            <span class="text-white font-bold text-lg">الفحص السنوي</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="flex items-center mb-4">
+                            <div class="service-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <h3 class="service-title">الفحص السنوي</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            فحص شامل ودوري لأنظمة التكييف لضمان الكفاءة والأداء المثالي
+                        </p>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/966596678717?text=مرحباً، أريد الاستفسار عن خدمة الفحص السنوي" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                واتساب
+                            </a>
+                            <a href="tel:0596678717" class="btn-call">
+                                <i class="fas fa-phone"></i>
+                                اتصل
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -343,8 +389,7 @@
     <script>
         // تفعيل الأنيميشنات عند التمرير للقسم
         document.addEventListener('DOMContentLoaded', function() {
-            const section = document.getElementById('warranty');
-            const cards = section.querySelectorAll('.animate-card');
+            const cards = document.querySelectorAll('.animate-card');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
