@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
         
         .hero-section {
@@ -21,23 +21,13 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 85vh;
-            min-height: 600px;
-            max-height: 800px;
+            height: auto;
+            min-height: 100vh;
             position: relative;
             overflow: hidden;
-        }
-        
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: white;
-            border-radius: 50% 50% 0 0;
-            transform: translateY(50%);
+            padding: 2rem 0;
+            display: flex;
+            align-items: center;
         }
         
         .floating-element {
@@ -91,25 +81,72 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
+        /* تحسينات للتجاوب */
+        .hero-content {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .hero-image-container {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
-                height: 70vh;
-                min-height: 500px;
+                min-height: auto;
+                padding: 1.5rem 0;
             }
             
-            .hero-section::after {
-                height: 60px;
+            .hero-content {
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                text-align: center;
+            }
+            
+            .hero-image-container {
+                margin-top: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .floating-badges {
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 1rem 0;
+            }
+            
+            .hero-content {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .hero-image-container {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .floating-badges {
+                transform: scale(0.7);
             }
         }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- قسم الهيرو المطور -->
-    <section class="hero-section flex items-center justify-center relative">
+    <!-- hero section -->
+    <section class="hero-section">
         <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center hero-content">
                 <!-- النص والعنوان -->
-                <div class="text-white">
+                <div class="text-white order-2 lg:order-1">
                     <!-- البادئة -->
                     <div class="mb-6 slide-in-right stagger-1">
                         <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">مؤسسة أيوان الحجاز</span>
@@ -139,48 +176,44 @@
                     
                     <!-- ميزات سريعة -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-3 slide-in-right stagger-5">
-                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-tools text-blue-300 text-xl mb-2"></i>
+                        <div class="bg-white text-black backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-tools text-xl mb-2"></i>
                             <p class="text-xs font-medium">صيانة دورية</p>
                         </div>
-                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-bolt text-blue-300 text-xl mb-2"></i>
+                        <div class="bg-white text-black bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-bolt text-xl mb-2"></i>
                             <p class="text-xs font-medium">تركيب أنظمة</p>
                         </div>
-                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-cogs text-blue-300 text-xl mb-2"></i>
+                        <div class="bg-white text-black bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-cogs text-xl mb-2"></i>
                             <p class="text-xs font-medium">إصلاح أعطال</p>
                         </div>
-                        <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
-                            <i class="fas fa-headset text-blue-300 text-xl mb-2"></i>
+                        <div class="bg-white text-black bg-opacity-10 backdrop-blur-sm rounded-lg p-3 text-center">
+                            <i class="fas fa-headset text-xl mb-2"></i>
                             <p class="text-xs font-medium">دعم فني 24/7</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- الصورة أو العنصر البصري -->
-                <div class="flex justify-center slide-in-right stagger-6">
+                <div class="flex justify-center slide-in-right stagger-6 order-1 lg:order-2 hero-image-container">
                     <div class="relative">
                         <div class="floating-element">
-                            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
-                                <div class="bg-white rounded-xl p-4 shadow-lg">
-                                    <div class="flex justify-center mb-4">
-                                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-snowflake text-blue-500 text-2xl"></i>
-                                        </div>
-                                    </div>
-                                    <h3 class="text-lg font-bold text-center text-gray-800 mb-2">أيوان الحجاز</h3>
-                                    <p class="text-gray-600 text-center text-sm">الريادة في حلول التكييف منذ 15 عاماً</p>
+                            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-2xl">
+                                <div class="bg-white rounded-xl p-2 md:p-4 shadow-lg">
+                                   <img src="./images/logo.png" alt="شعار أيوان الحجاز" class="hero-image max-h-[300px] md:max-h-[400px] w-auto">
                                 </div>
                             </div>
                         </div>
                         
                         <!-- عناصر عائمة -->
-                        <div class="absolute -top-3 -right-3 bg-yellow-400 text-gray-800 font-bold py-1 px-3 rounded-full shadow-lg floating-element text-sm" style="animation-delay: 1s;">
-                            <span>خصم 20%</span>
-                        </div>
-                        <div class="absolute -bottom-3 -left-3 bg-green-500 text-white font-bold py-1 px-3 rounded-full shadow-lg floating-element text-sm" style="animation-delay: 2s;">
-                            <span>ضمان 3 سنوات</span>
+                        <div class="floating-badges">
+                            <div class="absolute -top-3 -right-3 bg-yellow-400 text-gray-800 font-bold py-1 px-3 rounded-full shadow-lg floating-element" style="animation-delay: 1s;">
+                                <span class="text-xs md:text-sm">خصم 20%</span>
+                            </div>
+                            <div class="absolute -bottom-3 -left-3 bg-green-500 text-white font-bold py-1 px-3 rounded-full shadow-lg floating-element" style="animation-delay: 2s;">
+                                <span class="text-xs md:text-sm">ضمان 3 سنوات</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,8 +231,6 @@
         </div>
     </section>
     
-   
-
     <script>
         // تأثيرات الظهور عند التمرير
         document.addEventListener('DOMContentLoaded', function() {
