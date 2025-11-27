@@ -1342,6 +1342,149 @@
             -webkit-text-fill-color: transparent;
         }
     </style>
+    <!--  قسم التكييف وخدمات الشركة -->
+          <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .image-container-1 {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .image-container-1:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-container-1 img {
+            transition: transform 0.6s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-container-1:hover img {
+            transform: scale(1.05);
+        }
+        
+        .feature-list li {
+            transition: all 0.3s ease;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-list li:hover {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-list li:hover .feature-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .contact-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .contact-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
 
 </head>
 
@@ -2713,62 +2856,132 @@
     <!-- نهاية قسم الخدمات -->
 
     <!-- بداية قسم التكييف وخدمات الشركة -->
-    <section class="py-5 bg-white">
-        <div class="container">
-            <div class="row g-5 align-items-center">
-                <!-- القسم الأول: الصورة -->
-                <div class="col-lg-6">
-                    <div class="position-relative rounded overflow-hidden shadow-lg">
-                        <img class="img-fluid w-100 rounded" src="./images/Artboard 4.avif"
-                            alt="أفضل خدمات التكييف المركزي">
+     <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                
+              
+
+                <!-- القسم الثاني: النص -->
+                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInLeft" dir="rtl">
+                    <div class="mb-6">
+                        <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                            الحل الأمثل
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                        نظام تكييف مركزي احترافي 
+                        <span class="gradient-text">يناسب الجميع</span>
+                    </h2>
+                    
+                    <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                        <strong class="text-blue-600">شركة أيوان الحجاز</strong> تقدم حلولًا متكاملة لتوريد وتركيب أنظمة التكييف المركزي بجدة. نحن
+                        نضمن أعلى جودة باستخدام أفضل المواد وأسعار تنافسية تناسب الجميع.
+                    </p>
+
+                    <ul class="feature-list space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-800 mb-1">توريد وتركيب التكييف المركزي</h4>
+                                <p class="text-gray-600 text-sm">(كونسيلد، تشيلر، VRV) بأحدث التقنيات</p>
+                            </div>
+                        </li>
+                        
+                        <li class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-800 mb-1">تنفيذ مشاريع متكاملة</h4>
+                                <p class="text-gray-600 text-sm">مع خدمات العزل وتركيب الدكت المتكاملة</p>
+                            </div>
+                        </li>
+                        
+                        <li class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-800 mb-1">خطط صيانة دورية</h4>
+                                <p class="text-gray-600 text-sm">مصممة خصيصًا لتتناسب مع جميع الاحتياجات</p>
+                            </div>
+                        </li>
+                        
+                        <li class="flex items-start">
+                            <div class="feature-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-800 mb-1">عروض مذهلة طوال العام</h4>
+                                <p class="text-gray-600 text-sm">خصومات حصرية على كافة خدماتنا</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="space-y-6">
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            تواصل معنا الآن للاستفادة من أفضل خدمات التكييف المركزي سواء للمنزل أو المشاريع التجارية.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                            <a href="tel:0596678717" class="contact-badge">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>اتصل بنا: 0596678717</span>
+                            </a>
+                            
+                            <a href="https://wa.me/966596678717" class="contact-badge" style="background: linear-gradient(135deg, #25d366, #128c7e);">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>راسلنا على الواتساب</span>
+                            </a>
+                        </div>
+                        
+                        <div class="flex items-center text-green-600 font-medium">
+                            <span class="pulse-dot"></span>
+                            <span class="mr-2">متاحون للرد على استفساراتك 24/7</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- القسم الثاني: النص -->
-                <div class="col-lg-6" dir="rtl">
-                    <h2 class="display-5 fw-bold mb-4 text-dark">نظام تكييف مركزي احترافي يناسب الجميع</h2>
-                    <p class="lead text-muted mb-4">
-                        <strong>شركة كول مود</strong> تقدم حلولًا متكاملة لتوريد وتركيب أنظمة التكييف المركزي بجدة. نحن
-                        نضمن أعلى جودة باستخدام أفضل المواد وأسعار تنافسية تناسب الجميع.
-                    </p>
-                    <ul class="list-unstyled mb-4">
-                        <li class="d-flex align-items-center mb-3">
-                            <span class="icon text-primary me-3">
-                                <i class="fa fa-check-circle fa-lg"></i>
-                            </span>
-                            <span>توريد وتركيب التكييف المركزي (كونسيلد، تشيلر، VRV).</span>
-                        </li>
-                        <li class="d-flex align-items-center mb-3">
-                            <span class="icon text-primary me-3">
-                                <i class="fa fa-check-circle fa-lg"></i>
-                            </span>
-                            <span>تنفيذ مشاريع متكاملة مع خدمات العزل وتركيب الدكت.</span>
-                        </li>
-                        <li class="d-flex align-items-center mb-3">
-                            <span class="icon text-primary me-3">
-                                <i class="fa fa-check-circle fa-lg"></i>
-                            </span>
-                            <span>خطط صيانة دورية تناسب جميع الاحتياجات.</span>
-                        </li>
-                        <li class="d-flex align-items-center mb-3">
-                            <span class="icon text-primary me-3">
-                                <i class="fa fa-check-circle fa-lg"></i>
-                            </span>
-                            <span>عروض مذهلة على كافة خدماتنا طوال العام.</span>
-                        </li>
-                    </ul>
-                    <p class="text-muted">
-                        تواصل معنا الآن للاستفادة من أفضل خدمات التكييف المركزي سواء للمنزل أو المشاريع التجارية.
-                    </p>
-                    <p class="fw-bold mb-0">
-                        <i class="fa fa-phone-alt text-primary me-2"></i>
-                        <strong>اتصل أو راسلنا عبر الواتساب:</strong>
-                        <a href="tel:0596678717" class="text-primary">0596678717</a>
-                    </p>
+                  <!-- القسم الأول: الصورة -->
+                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInRight">
+                    <div class="image-container-1">
+                        <img class="w-full h-[500px]" src="./images/Artboard 4.avif" alt="أفضل خدمات التكييف المركزي">
+                        <!-- عناصر زخرفية -->
+                        <div class="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg">
+                            <i class="fas fa-star mr-2"></i>الأفضل في جدة
+                        </div>
+                        <div class="absolute bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg floating-element">
+                            <i class="fas fa-bolt mr-2"></i>كفاءة عالية
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        // تفعيل الأنيميشنات عند التمرير للقسم
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate-fadeInLeft, .animate-fadeInRight');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        element.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
     <!-- نهاية قسم التكييف وخدمات الشركة -->
 
     <!-- بداية قسم الخدمات المميزة -->
