@@ -330,7 +330,7 @@
             background-position: center;
             background-repeat: no-repeat;
             height: auto;
-            min-height: 80vh;
+            min-height: 70vh;
             position: relative;
             overflow: hidden;
             padding: 2rem 0;
@@ -378,7 +378,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0, 82, 147, 0.85) 0%, rgba(0, 45, 98, 0.4) 100%);
+            background: linear-gradient(135deg, rgba(0, 82, 147, 0.5) 0%, rgba(0, 45, 98, 0.4) 100%);
             z-index: 1;
             border-bottom-left-radius: 50px;
             border-bottom-right-radius: 50px;
@@ -1424,22 +1424,50 @@
         }
     </style>
     <!-- warranty -->
-         <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+        }
         
         body {
             font-family: 'Cairo', sans-serif;
+            background: #f8fafc;
+        }
+        
+        .warranty-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* تصميم 4 كروت بجانب بعض */
+        .four-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            perspective: 1000px;
         }
         
         .warranty-card {
-            position: relative;
             background: white;
-            border-radius: 24px;
+            border-radius: 20px;
             padding: 2.5rem;
-            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            transition: all 0.6s ease;
+            opacity: 0;
+            transform: translateY(100px) scale(0.8);
+            position: relative;
             overflow: hidden;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .warranty-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
         
         .warranty-card::before {
@@ -1448,10 +1476,10 @@
             top: 0;
             right: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #10b981, #3b82f6, #f59e0b);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             transform: scaleX(0);
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
         }
         
         .warranty-card:hover::before {
@@ -1459,93 +1487,99 @@
         }
         
         .warranty-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-        }
-        
-        .warranty-icon {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            border: 3px solid #e2e8f0;
-            transition: all 0.4s ease;
-        }
-        
-        .warranty-card:hover .warranty-icon {
-            transform: scale(1.1);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .warranty-icon i {
-            font-size: 3rem;
-            transition: all 0.4s ease;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent-color);
         }
         
         .warranty-badge {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
             font-weight: bold;
             font-size: 1.1rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-            z-index: 10;
         }
         
-        .warranty-badge.warning {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        .warranty-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 2rem;
+            transition: all 0.4s ease;
         }
         
-        .warranty-badge.success {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        .warranty-card:hover .warranty-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        /* تأثيرات متقدمة */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color), transparent);
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
         }
         
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
         
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
         
-        .animate-card {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.3s; }
-        .stagger-3 { animation-delay: 0.5s; }
+        /* تأثيرات الظهور المختلفة */
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
         
         .gradient-text {
-            background: linear-gradient(135deg, #1e40af, #3b82f6, #1e40af);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
+        /* تأثيرات خاصة لكل كارد */
+        .card-1 { background: linear-gradient(135deg, #ffffff, #f0f9ff); }
+        .card-2 { background: linear-gradient(135deg, #ffffff, #f8fafc); }
+        .card-3 { background: linear-gradient(135deg, #ffffff, #f0f9ff); }
+        .card-4 { background: linear-gradient(135deg, #ffffff, #f8fafc); }
+        
         .feature-list li {
             transition: all 0.3s ease;
-            padding: 0.75rem 0;
+            padding: 0.5rem 0;
             border-bottom: 1px solid #f1f5f9;
         }
         
@@ -1560,40 +1594,17 @@
             padding-right: 1rem;
         }
         
-        .pulse-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 1200px) {
+            .four-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-        
-        .guarantee-stamp {
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #1e40af, #1e40af);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            transform: rotate(-15deg);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-            opacity: 0.9;
-        }
-        
-        .guarantee-stamp::after {
-            content: 'مضمون';
-            font-size: 1.2rem;
+        @media (max-width: 768px) {
+            .four-cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
     <!-- قسم الخدمات  -->
@@ -1768,146 +1779,283 @@
         }
     </style>
     <!--  قسم التكييف وخدمات الشركة -->
-          <style>
+     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+        }
         
         body {
             font-family: 'Cairo', sans-serif;
+            background: #f8fafc;
         }
         
-        .image-container-1 {
+        .ac-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
             position: relative;
-            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
         }
         
-        .image-container-1:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        /* تصميم الصورة الجديد */
+        .modern-image-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
-        .image-container-1 img {
-            transition: transform 0.6s ease;
+        .modern-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.05));
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.6s ease;
         }
         
-        .image-container-1:hover img {
-            transform: scale(1.05);
+        .modern-image-container:hover::before {
+            opacity: 1;
         }
         
-        .feature-list li {
-            transition: all 0.3s ease;
-            padding: 1rem;
-            border-radius: 12px;
-            margin-bottom: 0.5rem;
+        .modern-image-container img {
+            transition: all 0.8s ease;
+            transform: scale(1);
         }
         
-        .feature-list li:hover {
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            transform: translateX(-5px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.1);
+        .modern-image-container:hover img {
+            transform: scale(1.08);
         }
         
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 1rem;
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            color: white;
-            font-size: 1.25rem;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-list li:hover .feature-icon {
-            transform: scale(1.1);
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-        }
-        
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        .animate-fadeInLeft {
-            animation: fadeInLeft 0.8s ease-out forwards;
-        }
-        
-        .animate-fadeInRight {
-            animation: fadeInRight 0.8s ease-out forwards;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .contact-badge {
-            background: linear-gradient(135deg, #10b981, #059669);
+        /* تأثيرات العناصر العائمة */
+        .floating-badge {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
             font-weight: bold;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            z-index: 10;
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+        
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        .floating-badge.top {
+            top: 2rem;
+            left: 2rem;
+        }
+        
+        .floating-badge.bottom {
+            bottom: 2rem;
+            right: 2rem;
+            animation-delay: 2s;
+        }
+        
+        /* تصميم الميزات الجديد */
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        
+        .feature-card.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .feature-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-color);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+        
+        /* تأثيرات النص */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        .gradient-text:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* أزرار الاتصال المحسنة */
+        .contact-button {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
         }
         
-        .contact-badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
         }
         
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
+        .contact-button:hover::before {
+            transform: translateX(0);
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .contact-button.phone {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
         }
         
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
+        .contact-button.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* تأثيرات الظهور */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        
+        /* أشكال خلفية */
+        .background-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
             border-radius: 50%;
-            background: #10b981;
-            animation: pulse 2s infinite;
-            display: inline-block;
-            margin-left: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-color), transparent);
+            opacity: 0.05;
+            animation: floatShape 8s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            right: 25%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .modern-image-container {
+                margin-bottom: 2rem;
+            }
+            
+            .feature-card {
+                transform: translateY(30px);
+            }
+            
+            .feature-card.active {
+                transform: translateY(0);
+            }
         }
     </style>
     <!-- قسم الخدمات المميزه  -->
@@ -2978,7 +3126,7 @@
         
         .social-btn:hover {
             transform: translateY(-3px);
-            border-color: #3b82f6;
+           
         }
         
         .instagram:hover {
@@ -3069,6 +3217,29 @@
         .floating-whatsapp:hover {
             transform: scale(1.1);
             box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+        }
+        .floating-phone {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1877f2, #007bff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 25px rgba(37, 78, 211, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .floating-phone:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(37, 78, 211, 0.4);
         }
         
         @keyframes pulse {
@@ -4323,119 +4494,144 @@
 
     <!-- نهاية قسم المميزات -->
     <!-- قسم الضمان -->
-    <section class="py-16 md:py-24 relative overflow-hidden" id="warranty" dir="rtl">
+    <section class="py-20 md:py-32 warranty-section relative overflow-hidden" id="warranty" dir="rtl">
         
-        <!-- عناصر زخرفية خلفية -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full -translate-y-1/2 translate-x-1/2 opacity-20 floating-element"></div>
-        <div class="absolute bottom-0 left-0 w-80 h-80 bg-green-200 rounded-full translate-y-1/2 -translate-x-1/2 opacity-20 floating-element" style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/2 left-1/3 w-32 h-32 bg-amber-200 rounded-full opacity-30 floating-element" style="animation-delay: 4s;"></div>
+        <!-- أشكال عائمة -->
+        <div class="floating-shapes">
+            <div class="floating-shape w-64 h-64 top-10 left-10"></div>
+            <div class="floating-shape w-40 h-40 bottom-20 right-20" style="animation-delay: 2s;"></div>
+            <div class="floating-shape w-32 h-32 top-1/3 right-1/4" style="animation-delay: 4s;"></div>
+        </div>
         
         <div class="container mx-auto px-4 relative z-10">
             <!-- العنوان الرئيسي -->
-            <div class="text-center mb-16">
+            <div class="text-center mb-20">
                 <div class="inline-block mb-6">
-                    <span class="bg-gradient-to-r from-blue-500 to-green-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg">
+                    <span class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg">
                         <i class="fas fa-shield-alt ml-3"></i>
                         ضمان الجودة
                     </span>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
                     ضمان شامل يمتد لـ <span class="gradient-text">10 سنوات</span>
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                     نقدم أفضل ضمان في السوق لنؤكد ثقتنا في جودة خدماتنا ونسعى دائمًا لتحقيق رضاكم التام
                 </p>
                 <div class="flex justify-center items-center mt-8 space-x-4 space-x-reverse">
-                    <div class="pulse-dot bg-green-500"></div>
+                    <div class="pulse-dot"></div>
                     <span class="text-green-600 font-medium">خدمة عملاء متاحة 24/7</span>
                 </div>
             </div>
 
-            <!-- شبكة بطاقات الضمان -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- بطاقة ضمان أعمال الدكت -->
-                <div class="warranty-card animate-card stagger-1 opacity-0">
-                    <div class="warranty-badge success">10 سنوات</div>
-                    <div class="warranty-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #3b82f6;">
-                        <i class="fas fa-tools text-green-500"></i>
+            <!-- 4 كروت بجانب بعض -->
+            <div class="four-cards-grid mb-20">
+                <!-- كارد 1 -->
+                <div class="warranty-card stagger-1 card-1">
+                    <div class="warranty-badge">10 سنوات</div>
+                    <div class="warranty-icon">
+                        <i class="fas fa-tools"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">ضمان أعمال الدكت</h3>
                     <ul class="feature-list space-y-3">
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">ضمان شامل على التركيبات والتنفيذ</span>
+                            <i class="fas fa-check-circle text-green-500 ml-3"></i>
+                            ضمان شامل على التركيبات
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">صيانة دورية مجانية لمدة 10 سنوات</span>
+                            <i class="fas fa-check-circle text-green-500 ml-3"></i>
+                            صيانة دورية مجانية
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">فحص وتنظيف شامل كل 6 أشهر</span>
+                            <i class="fas fa-check-circle text-green-500 ml-3"></i>
+                            فحص وتنظيف شامل
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-green-500 ml-3 text-lg"></i>
-                            <span class="flex-1">استبدال القطع التالفة بدون تكلفة</span>
+                            <i class="fas fa-check-circle text-green-500 ml-3"></i>
+                            استبدال القطع التالفة
                         </li>
                     </ul>
-                    <div class="guarantee-stamp"></div>
                 </div>
 
-                <!-- بطاقة ضمان تمديدات النحاس -->
-                <div class="warranty-card animate-card stagger-2 opacity-0">
+                <!-- كارد 2 -->
+                <div class="warranty-card stagger-2 card-2">
                     <div class="warranty-badge">10 سنوات</div>
-                    <div class="warranty-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #3b82f6;">
-                        <i class="fas fa-cogs text-blue-500"></i>
+                    <div class="warranty-icon">
+                        <i class="fas fa-cogs"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">ضمان تمديدات النحاس</h3>
                     <ul class="feature-list space-y-3">
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">فحص الضغط والفاكيوم الدوري</span>
+                            <i class="fas fa-check-circle text-blue-500 ml-3"></i>
+                            فحص الضغط والفاكيوم
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">جودة التركيب المضمونة والمعتمدة</span>
+                            <i class="fas fa-check-circle text-blue-500 ml-3"></i>
+                            جودة التركيب المضمونة
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">استخدام نحاس مولر الأمريكي الأصلي</span>
+                            <i class="fas fa-check-circle text-blue-500 ml-3"></i>
+                            نحاس مولر الأمريكي
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-blue-500 ml-3 text-lg"></i>
-                            <span class="flex-1">مراقبة مستمرة لأداء النظام</span>
+                            <i class="fas fa-check-circle text-blue-500 ml-3"></i>
+                            مراقبة أداء النظام
                         </li>
                     </ul>
-                    <div class="guarantee-stamp" style="background: linear-gradient(135deg, #3b82f6, #1e40af);"></div>
                 </div>
 
-                <!-- بطاقة ضمان ضد التسريب -->
-                <div class="warranty-card animate-card stagger-3 opacity-0">
-                    <div class="warranty-badge warning">حماية شاملة</div>
-                    <div class="warranty-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-color: #3b82f6;">
-                        <i class="fas fa-shield-alt text-amber-500"></i>
+                <!-- كارد 3 -->
+                <div class="warranty-card stagger-3 card-3">
+                    <div class="warranty-badge">حماية شاملة</div>
+                    <div class="warranty-icon">
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">ضمان ضد التسريب</h3>
                     <ul class="feature-list space-y-3">
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">استبدال فوري للنحاس المعيب</span>
+                            <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                            استبدال فوري للنحاس
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">معالجة سريعة خلال 24 ساعة</span>
+                            <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                            معالجة خلال 24 ساعة
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">تعويض عن أي أضرار ناتجة</span>
+                            <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                            تعويض عن الأضرار
                         </li>
                         <li class="flex items-center text-gray-700">
-                            <i class="fas fa-check-circle text-amber-500 ml-3 text-lg"></i>
-                            <span class="flex-1">فحص مجاني للأنظمة كل 3 أشهر</span>
+                            <i class="fas fa-check-circle text-amber-500 ml-3"></i>
+                            فحص مجاني كل 3 أشهر
                         </li>
                     </ul>
-                    <div class="guarantee-stamp" style="background: linear-gradient(135deg, #3b82f6, #1e40af);"></div>
+                </div>
+
+                <!-- كارد 4 -->
+                <div class="warranty-card stagger-4 card-4">
+                    <div class="warranty-badge">دعم فني</div>
+                    <div class="warranty-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">خدمة ودعم متكامل</h3>
+                    <ul class="feature-list space-y-3">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-purple-500 ml-3"></i>
+                            دعم فني 24/7
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-purple-500 ml-3"></i>
+                            استجابة فورية للطوارئ
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-purple-500 ml-3"></i>
+                            فريق فني متخصص
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-purple-500 ml-3"></i>
+                            زيارات دورية مجانية
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -4468,7 +4664,7 @@
                         </div>
                     </div>
                     <div class="flex-1 text-center">
-                        <div class="bg-gradient-to-br from-blue-500 to-green-500 rounded-2xl p-8 text-white shadow-lg">
+                        <div class="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl p-8 text-white shadow-lg">
                             <i class="fas fa-star text-4xl mb-4"></i>
                             <h4 class="text-2xl font-bold mb-3">رضا العملاء</h4>
                             <p class="text-blue-100 text-lg">98% من عملائنا يوصون بنا</p>
@@ -4481,22 +4677,57 @@
     </section>
 
     <script>
-        // تفعيل الأنيميشنات عند التمرير للقسم
+        // تفعيل تأثيرات GSAP للكروت الأربعة
         document.addEventListener('DOMContentLoaded', function() {
-            const section = document.getElementById('warranty');
-            const cards = section.querySelectorAll('.animate-card');
+            gsap.registerPlugin(ScrollTrigger);
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const element = entry.target;
-                        element.style.opacity = '1';
+            // تأثيرات الكروت الأربعة
+            const warrantyCards = gsap.utils.toArray('.warranty-card');
+            
+            warrantyCards.forEach((card, index) => {
+                gsap.fromTo(card, {
+                    opacity: 0,
+                    y: 100,
+                    scale: 0.8,
+                    rotationY: 15
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    rotationY: 0,
+                    duration: 0.8,
+                    delay: index * 0.15,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    },
+                    onComplete: function() {
+                        card.classList.add('active');
                     }
                 });
-            }, { threshold: 0.1 });
+            });
             
-            cards.forEach(card => {
-                observer.observe(card);
+            // تأثيرات القسم الإضافي
+            const infoSection = document.querySelector('.bg-white.rounded-3xl');
+            gsap.fromTo(infoSection, {
+                opacity: 0,
+                y: 50,
+                scale: 0.95
+            }, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: infoSection,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
             });
         });
     </script>
@@ -4730,129 +4961,202 @@
     <!-- نهاية قسم الخدمات -->
 
     <!-- بداية قسم التكييف وخدمات الشركة -->
-     <section class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
+  
+    <section class="py-20 md:py-32 ac-section relative overflow-hidden">
+        
+        <!-- أشكال خلفية -->
+        <div class="background-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
                 
-              
-
-                <!-- القسم الثاني: النص -->
-                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInLeft" dir="rtl">
-                    <div class="mb-6">
-                        <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                 <!-- القسم الثاني: النص -->
+                <div class="w-full lg:w-1/2" dir="rtl">
+                    <div class="mb-8 scroll-reveal stagger-2">
+                        <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
                             الحل الأمثل
                         </span>
                     </div>
                     
-                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-8 leading-tight scroll-reveal stagger-2">
                         نظام تكييف مركزي احترافي 
                         <span class="gradient-text">يناسب الجميع</span>
                     </h2>
                     
-                    <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                    <p class="text-xl text-gray-600 leading-relaxed mb-10 scroll-reveal stagger-3">
                         <strong class="text-blue-600">شركة أيوان الحجاز</strong> تقدم حلولًا متكاملة لتوريد وتركيب أنظمة التكييف المركزي بجدة. نحن
                         نضمن أعلى جودة باستخدام أفضل المواد وأسعار تنافسية تناسب الجميع.
                     </p>
 
-                    <ul class="feature-list space-y-4 mb-8">
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
+                    <!-- الميزات -->
+                    <div class="space-y-4 mb-12">
+                        <div class="feature-card stagger-1">
+                            <div class="flex items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-800 mb-2 text-lg">توريد وتركيب التكييف المركزي</h4>
+                                    <p class="text-gray-600">(كونسيلد، تشيلر، VRV) بأحدث التقنيات والمواد المعتمدة</p>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">توريد وتركيب التكييف المركزي</h4>
-                                <p class="text-gray-600 text-sm">(كونسيلد، تشيلر، VRV) بأحدث التقنيات</p>
-                            </div>
-                        </li>
+                        </div>
                         
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
+                        <div class="feature-card stagger-2">
+                            <div class="flex items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-800 mb-2 text-lg">تنفيذ مشاريع متكاملة</h4>
+                                    <p class="text-gray-600">مع خدمات العزل وتركيب الدكت المتكاملة بأعلى معايير الجودة</p>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">تنفيذ مشاريع متكاملة</h4>
-                                <p class="text-gray-600 text-sm">مع خدمات العزل وتركيب الدكت المتكاملة</p>
-                            </div>
-                        </li>
+                        </div>
                         
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
+                        <div class="feature-card stagger-3">
+                            <div class="flex items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-800 mb-2 text-lg">خطط صيانة دورية</h4>
+                                    <p class="text-gray-600">مصممة خصيصًا لتتناسب مع جميع الاحتياجات والميزانيات</p>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">خطط صيانة دورية</h4>
-                                <p class="text-gray-600 text-sm">مصممة خصيصًا لتتناسب مع جميع الاحتياجات</p>
-                            </div>
-                        </li>
+                        </div>
                         
-                        <li class="flex items-start">
-                            <div class="feature-icon">
-                                <i class="fas fa-check"></i>
+                        <div class="feature-card stagger-4">
+                            <div class="flex items-start">
+                                <div class="feature-icon">
+                                    <i class="fas fa-gift"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-800 mb-2 text-lg">عروض مذهلة طوال العام</h4>
+                                    <p class="text-gray-600">خصومات حصرية على كافة خدماتنا وضمان ممتد لـ 10 سنوات</p>
+                                </div>
                             </div>
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 mb-1">عروض مذهلة طوال العام</h4>
-                                <p class="text-gray-600 text-sm">خصومات حصرية على كافة خدماتنا</p>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
 
-                    <div class="space-y-6">
-                        <p class="text-gray-600 text-lg leading-relaxed">
+                    <!-- معلومات الاتصال -->
+                    <div class="space-y-8 scroll-reveal stagger-4">
+                        <p class="text-gray-600 text-xl leading-relaxed">
                             تواصل معنا الآن للاستفادة من أفضل خدمات التكييف المركزي سواء للمنزل أو المشاريع التجارية.
                         </p>
                         
-                        <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                            <a href="tel:0596678717" class="contact-badge">
+                        <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                            <a href="tel:0596678717" class="contact-button phone">
                                 <i class="fas fa-phone-alt"></i>
                                 <span>اتصل بنا: 0596678717</span>
                             </a>
                             
-                            <a href="https://wa.me/966596678717" class="contact-badge" style="background: linear-gradient(135deg, #25d366, #128c7e);">
+                            <a href="https://wa.me/966596678717" class="contact-button whatsapp">
                                 <i class="fab fa-whatsapp"></i>
                                 <span>راسلنا على الواتساب</span>
                             </a>
                         </div>
                         
-                        <div class="flex items-center text-green-600 font-medium">
-                            <span class="pulse-dot"></span>
-                            <span class="mr-2">متاحون للرد على استفساراتك 24/7</span>
+                        <div class="flex items-center text-green-600 font-medium text-lg">
+                            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse ml-3"></div>
+                            <span>متاحون للرد على استفساراتك 24/7</span>
                         </div>
                     </div>
                 </div>
 
-                  <!-- القسم الأول: الصورة -->
-                <div class="w-full lg:w-1/2 opacity-0 animate-fadeInRight">
-                    <div class="image-container-1">
-                        <img class="w-full h-[500px]" src="./images/Artboard 1 (1).png" alt="أفضل خدمات التكييف المركزي">
+                <!-- القسم الأول: الصورة -->
+                <div class="w-full lg:w-1/2 scroll-reveal stagger-1">
+                    <div class="modern-image-container">
+                        <img class="w-full h-auto object-cover" src="./images/Artboard 1 (1).png" alt="أفضل خدمات التكييف المركزي">
+                        
                         <!-- عناصر زخرفية -->
-                        <div class="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg">
-                            <i class="fas fa-star mr-2"></i>الأفضل في جدة
+                        <div class="floating-badge top">
+                            <i class="fas fa-star ml-2"></i>الأفضل في جدة
                         </div>
-                        <div class="absolute bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg floating-element">
-                            <i class="fas fa-bolt mr-2"></i>كفاءة عالية
-                        </div>
+                      
                     </div>
                 </div>
+
+               
             </div>
         </div>
     </section>
 
     <script>
-        // تفعيل الأنيميشنات عند التمرير للقسم
+        // تفعيل تأثيرات GSAP المتقدمة
         document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.animate-fadeInLeft, .animate-fadeInRight');
+            gsap.registerPlugin(ScrollTrigger);
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const element = entry.target;
-                        element.style.opacity = '1';
+            // تأثيرات الظهور العامة
+            const scrollElements = gsap.utils.toArray('.scroll-reveal');
+            scrollElements.forEach((element, index) => {
+                gsap.fromTo(element, {
+                    opacity: 0,
+                    y: 60
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    delay: index * 0.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    },
+                    onComplete: function() {
+                        element.classList.add('active');
                     }
                 });
-            }, { threshold: 0.1 });
+            });
             
-            animatedElements.forEach(element => {
-                observer.observe(element);
+            // تأثيرات الميزات
+            const featureCards = gsap.utils.toArray('.feature-card');
+            featureCards.forEach((card, index) => {
+                gsap.fromTo(card, {
+                    opacity: 0,
+                    x: 50
+                }, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    delay: index * 0.15,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    },
+                    onComplete: function() {
+                        card.classList.add('active');
+                    }
+                });
+            });
+            
+            // تأثيرات الصورة
+            const imageContainer = document.querySelector('.modern-image-container');
+            gsap.fromTo(imageContainer, {
+                opacity: 0,
+                scale: 0.9,
+                rotationY: 10
+            }, {
+                opacity: 1,
+                scale: 1,
+                rotationY: 0,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: imageContainer,
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
             });
         });
     </script>
@@ -5107,10 +5411,7 @@
         </div>
     </section>
 
-    <!-- فقاعة الاتصال العائمة -->
-    <a href="https://wa.me/966596678717" class="contact-bubble floating-element">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+
 
     <script>
         // تفعيل الأنيميشنات عند التمرير
@@ -5383,7 +5684,7 @@
                     <div class="stat-label text-dark font-semibold">مشروع منفذ</div>
                 </div>
                 <div class="stat-box text-center p-6 rounded-xl bg-white/70 hover:bg-white hover:-translate-y-2 transition-all duration-300">
-                    <div class="stat-number text-3xl md:text-4xl font-bold text-primary mb-2">15</div>
+                    <div class="stat-number text-3xl md:text-4xl font-bold text-primary mb-2">10</div>
                     <div class="stat-label text-dark font-semibold">سنة خبرة</div>
                 </div>
                 <div class="stat-box text-center p-6 rounded-xl bg-white/70 hover:bg-white hover:-translate-y-2 transition-all duration-300">
@@ -6548,7 +6849,7 @@
                             <img src="./images/logo.png" alt="">
                         </div>
                         <h4 class="text-2xl font-bold text-white">
-                            <span class="company-logo">أيوان الحجاز</span>
+                            <span>أيوان الحجاز</span>
                         </h4>
                     </div>
                     <p class="text-gray-300 leading-relaxed mb-6 text-lg">
@@ -6675,6 +6976,11 @@
     <a href="https://wa.me/966596678717" class="floating-whatsapp">
         <i class="fab fa-whatsapp"></i>
     </a>
+<!-- Floating Call Button -->
+<a href="tel:0596678717 "
+   class="floating-phone">
+    <i class="fas fa-phone"></i>
+</a>
 
     <script>
         // تفعيل الأنيميشن عند التمرير
@@ -6700,9 +7006,7 @@
 
 
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top" aria-label="Back to Top"><i
-                class="bi bi-arrow-up"></i></a>
+
 
 
         <!-- JavaScript Libraries -->
