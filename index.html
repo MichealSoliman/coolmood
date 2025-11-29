@@ -1016,15 +1016,68 @@
         }
     </style>
      <!-- قسم الميزات -->
-          <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-blue: #1e40af;
+            --light-blue: #3b82f6;
+            --accent-green: #10b981;
+        }
         
         body {
             font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
         }
         
+        /* تأثيرات التمرير */
+        .scroll-section {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scroll-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scroll-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* تأثيرات البطاقات */
         .feature-card {
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             border: 1px solid transparent;
             position: relative;
             overflow: hidden;
@@ -1037,8 +1090,8 @@
             right: 0;
             width: 4px;
             height: 0;
-            background: linear-gradient(to bottom, #3b82f6, #10b981);
-            transition: height 0.4s ease;
+            background: linear-gradient(to bottom, var(--light-blue), var(--accent-green));
+            transition: height 0.5s ease;
         }
         
         .feature-card:hover::before {
@@ -1046,62 +1099,55 @@
         }
         
         .feature-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-12px);
             border-color: #e5e7eb;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
         
         .icon-circle {
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .feature-card:hover .icon-circle {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(5deg);
         }
         
         .spec-card-1 {
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             border: 1px solid #f3f4f6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spec-card-1::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .spec-card-1:hover::before {
+            opacity: 1;
         }
         
         .spec-card-1:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-            border-color: #3b82f6;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--light-blue);
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-fadeInUp {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
+        /* تأثيرات الصور */
         .image-container {
             position: relative;
             overflow: hidden;
-            border-radius: 16px;
+            border-radius: 20px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
         
         .image-container::before {
@@ -1111,9 +1157,9 @@
             right: 0;
             bottom: 0;
             left: 0;
-            background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.5s ease;
             z-index: 1;
         }
         
@@ -1122,11 +1168,92 @@
         }
         
         .image-container img {
-            transition: transform 0.6s ease;
+            transition: transform 0.8s ease;
+            transform: scale(1);
         }
         
         .image-container:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
+        }
+        
+        /* تأثيرات النص */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        .gradient-text:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* عناصر عائمة */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* خط التقدم */
+        .progress-line {
+            position: relative;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--light-blue), var(--accent-green));
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        
+        /* تأثيرات إضافية */
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .scroll-section,
+            .scroll-left,
+            .scroll-right,
+            .scroll-scale {
+                transform: none !important;
+                transition: opacity 0.6s ease;
+            }
         }
     </style>
     <!-- قسم مواصفات النحاس -->
@@ -3494,68 +3621,110 @@
 
     <!-- بداية قسم المميزات -->
    
-    <section class="py-16 md:py-24 bg-white" dir="rtl" id="features">
-        <div class="container mx-auto px-4">
+    <section class="py-20 md:py-32 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden" dir="rtl" id="features">
+        <!-- عناصر زخرفية خلفية -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-20"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <!-- Header Section -->
-            <div class="mb-16 text-center">
-                <div class="opacity-0 animate-fadeInUp stagger-1">
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
+            <div class="mb-20 text-center">
+                <div class="scroll-section">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
                         تكييف مركزي لا مثيل له مع 
-                        <span class="gradient-text">شركة أيوان الحجاز</span>
+                        <span class="gradient-text text-glow">شركة أيوان الحجاز</span>
                     </h1>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                         نقدم حلولاً متكاملة وخدمات متميزة في مجال التكييف المركزي بجدة بأسعار مناسبة وجودة عالية.
                     </p>
-                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-8 rounded-full"></div>
+                    <div class="w-32 h-2 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-10 rounded-full"></div>
                 </div>
             </div>
 
             <!-- Main Content -->
-            <div class="flex flex-col lg:flex-row gap-12 items-center mb-16">
+            <div class="flex flex-col lg:flex-row gap-16 items-center mb-20">
                 <!-- Image Column -->
-                <div class="w-full lg:w-1/2 opacity-0 h-auto animate-fadeInUp stagger-2">
-                    <div class="image-container rounded-2xl shadow-xl overflow-hidden">
+                <div class="w-full lg:w-1/2 h-auto scroll-left">
+                    <div class="image-container rounded-3xl shadow-2xl overflow-hidden">
                         <img class="w-full h-auto object-cover" src="./images/Artboard 4 (3).png" alt="خدمات أيوان الحجاز" loading="lazy">
+                    </div>
+                    
+                    <!-- عنصر عائم -->
+                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-full shadow-xl floating-element">
+                        <span class="font-bold text-lg">جودة لا تضاهى</span>
                     </div>
                 </div>
 
                 <!-- Services Cards -->
-                <div class="w-full lg:w-1/2 space-y-6">
+                <div class="w-full lg:w-1/2 space-y-8">
                     <!-- Card 1 -->
-                    <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 opacity-0 animate-fadeInUp stagger-3">
+                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.1s">
                         <div class="flex items-start mb-4">
-                            <div class="icon-circle bg-blue-500 text-white w-16 h-16 rounded-full flex items-center justify-center ml-4">
-                                <i class="fas fa-tools text-2xl"></i>
+                            <div class="icon-circle bg-blue-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6 pulse-glow">
+                                <i class="fas fa-tools text-3xl"></i>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-2">تنفيذ أنظمة التكييف المركزي</h3>
-                                <p class="text-gray-600 text-lg leading-relaxed">توريد وتركيب وتأسيس أنظمة متكاملة للتكييف المركزي بأعلى معايير الجودة والكفاءة.</p>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">تنفيذ أنظمة التكييف المركزي</h3>
+                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">توريد وتركيب وتأسيس أنظمة متكاملة للتكييف المركزي بأعلى معايير الجودة والكفاءة.</p>
+                                
+                                <!-- خط التقدم -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-600">جودة التنفيذ</span>
+                                        <span class="text-sm font-bold text-blue-600">100%</span>
+                                    </div>
+                                    <div class="progress-line">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 opacity-0 animate-fadeInUp stagger-4">
+                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.2s">
                         <div class="flex items-start mb-4">
-                            <div class="icon-circle bg-amber-500 text-white w-16 h-16 rounded-full flex items-center justify-center ml-4">
-                                <i class="fas fa-cogs text-2xl"></i>
+                            <div class="icon-circle bg-amber-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6">
+                                <i class="fas fa-cogs text-3xl"></i>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-2">صيانة دورية شاملة</h3>
-                                <p class="text-gray-600 text-lg leading-relaxed">خدمات صيانة احترافية لضمان كفاءة وعمر أطول لنظام التكييف مع خطط صيانة مخصصة.</p>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">صيانة دورية شاملة</h3>
+                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">خدمات صيانة احترافية لضمان كفاءة وعمر أطول لنظام التكييف مع خطط صيانة مخصصة.</p>
+                                
+                                <!-- خط التقدم -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-600">سرعة الاستجابة</span>
+                                        <span class="text-sm font-bold text-amber-600">95%</span>
+                                    </div>
+                                    <div class="progress-line">
+                                        <div class="progress-fill" style="width: 95%"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="feature-card bg-white rounded-2xl p-6 shadow-lg border border-gray-100 opacity-0 animate-fadeInUp stagger-5">
+                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.3s">
                         <div class="flex items-start mb-4">
-                            <div class="icon-circle bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center ml-4">
-                                <i class="fas fa-headset text-2xl"></i>
+                            <div class="icon-circle bg-green-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6">
+                                <i class="fas fa-headset text-3xl"></i>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-800 mb-2">دعم فني 24/7</h3>
-                                <p class="text-gray-600 text-lg leading-relaxed">فريق متخصص من المهندسين والفنيين لخدمتكم على مدار الساعة مع استجابة فورية للطوارئ.</p>
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">دعم فني 24/7</h3>
+                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">فريق متخصص من المهندسين والفنيين لخدمتكم على مدار الساعة مع استجابة فورية للطوارئ.</p>
+                                
+                                <!-- خط التقدم -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-600">رضا العملاء</span>
+                                        <span class="text-sm font-bold text-green-600">98%</span>
+                                    </div>
+                                    <div class="progress-line">
+                                        <div class="progress-fill" style="width: 98%"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3563,65 +3732,156 @@
             </div>
 
             <!-- Specifications Section -->
-            <div class="mt-16 pt-16 border-t border-gray-200">
-                <div class="text-center mb-12 opacity-0 animate-fadeInUp stagger-1">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            <div class="mt-20 pt-20 border-t border-gray-200">
+                <div class="text-center mb-16 scroll-section">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
                         مواصفات وخصائص خدماتنا
                     </h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
                         نضمن لكم أعلى معايير الجودة والأداء في كل مشروع ننفذه
                     </p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-8 rounded-full"></div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <!-- Spec Card 1 -->
-                    <div class="spec-card-1 bg-white rounded-2xl p-8 text-center shadow-lg opacity-0 animate-fadeInUp stagger-2">
-                        <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-fire fa-2x text-red-500"></i>
+                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.1s">
+                        <div class="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element">
+                            <i class="fas fa-fire fa-3x text-red-500"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">أنظمة مقاومة للحريق</h3>
-                        <p class="text-gray-600 leading-relaxed">تضمن أعلى معايير الأمان والسلامة مع مواد مقاومة للحريق.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">أنظمة مقاومة للحريق</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">تضمن أعلى معايير الأمان والسلامة مع مواد مقاومة للحريق.</p>
                     </div>
 
                     <!-- Spec Card 2 -->
-                    <div class="spec-card-1 bg-white rounded-2xl p-8 text-center shadow-lg opacity-0 animate-fadeInUp stagger-3">
-                        <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-cogs fa-2x text-green-500"></i>
+                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.2s">
+                        <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element" style="animation-delay: 1s">
+                            <i class="fas fa-cogs fa-3x text-green-500"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">معايير جودة عالية</h3>
-                        <p class="text-gray-600 leading-relaxed">مصممة لتحقيق الأداء المثالي والعمر الطويل مع ضمان الجودة.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">معايير جودة عالية</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">مصممة لتحقيق الأداء المثالي والعمر الطويل مع ضمان الجودة.</p>
                     </div>
 
                     <!-- Spec Card 3 -->
-                    <div class="spec-card-1 bg-white rounded-2xl p-8 text-center shadow-lg opacity-0 animate-fadeInUp stagger-4">
-                        <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-headset fa-2x text-blue-500"></i>
+                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.3s">
+                        <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element" style="animation-delay: 2s">
+                            <i class="fas fa-headset fa-3x text-blue-500"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">دعم فني متكامل</h3>
-                        <p class="text-gray-600 leading-relaxed">تواصل سريع واستجابة فورية مع فريق دعم متكامل على مدار الساعة.</p>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">دعم فني متكامل</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">تواصل سريع واستجابة فورية مع فريق دعم متكامل على مدار الساعة.</p>
                     </div>
+                </div>
+            </div>
+            
+            <!-- قسم إضافي للإحصائيات -->
+            <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center scroll-left">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-600 mb-2">+500</div>
+                    <div class="text-gray-600 text-lg">مشروع منفذ</div>
+                </div>
+                <div class="text-center scroll-left" style="transition-delay: 0.1s">
+                    <div class="text-4xl md:text-5xl font-bold text-green-600 mb-2">98%</div>
+                    <div class="text-gray-600 text-lg">رضا العملاء</div>
+                </div>
+                <div class="text-center scroll-right" style="transition-delay: 0.2s">
+                    <div class="text-4xl md:text-5xl font-bold text-amber-600 mb-2">24/7</div>
+                    <div class="text-gray-600 text-lg">دعم فني</div>
+                </div>
+                <div class="text-center scroll-right" style="transition-delay: 0.3s">
+                    <div class="text-4xl md:text-5xl font-bold text-red-600 mb-2">10+</div>
+                    <div class="text-gray-600 text-lg">سنوات خبرة</div>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
-        // تفعيل الأنيميشنات عند التمرير للقسم
+        // تفعيل تأثيرات التمرير
         document.addEventListener('DOMContentLoaded', function() {
-            const section = document.getElementById('features');
-            const animatedElements = section.querySelectorAll('.animate-fadeInUp');
+            const scrollElements = document.querySelectorAll('.scroll-section, .scroll-left, .scroll-right, .scroll-scale');
             
-            const observer = new IntersectionObserver((entries) => {
+            const scrollObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const element = entry.target;
-                        element.style.opacity = '1';
+                        entry.target.classList.add('active');
+                        
+                        // تفعيل خطوط التقدم
+                        if (entry.target.querySelector('.progress-fill')) {
+                            const progressFill = entry.target.querySelector('.progress-fill');
+                            const width = progressFill.style.width;
+                            progressFill.style.width = '0';
+                            setTimeout(() => {
+                                progressFill.style.width = width;
+                            }, 300);
+                        }
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
             
-            animatedElements.forEach(element => {
-                observer.observe(element);
+            scrollElements.forEach(element => {
+                scrollObserver.observe(element);
+            });
+            
+            // تأثيرات GSAP متقدمة
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // تأثيرات للعناصر الرئيسية
+            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                gsap.fromTo(card, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.2,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+            
+            // تأثيرات للصور
+            gsap.fromTo('.image-container', {
+                opacity: 0,
+                x: -100,
+                scale: 0.9
+            }, {
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: '.image-container',
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+            
+            // تأثيرات للإحصائيات
+            gsap.utils.toArray('.text-center.scroll-left, .text-center.scroll-right').forEach((stat, i) => {
+                gsap.fromTo(stat.querySelector('div:first-child'), {
+                    textContent: 0,
+                    opacity: 0.5
+                }, {
+                    textContent: stat.querySelector('div:first-child').textContent,
+                    duration: 2,
+                    opacity: 1,
+                    snap: { textContent: 1 },
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
             });
         });
     </script>
@@ -5230,7 +5490,7 @@
                 <!-- مشروع 2 -->
                 <div class="project-card bg-white rounded-2xl shadow-custom overflow-hidden hover:shadow-custom-hover hover:-translate-y-3">
                     <div class="h-auto overflow-hidden relative">
-                        <img src="./images/Artboard 3 (2).png" 
+                        <img src="./images/Artboard 4 (3).png" 
                              alt="مشروع صيانة أنظمة التكييف" 
                              class="project-img w-full h-full object-cover">
                         <div class="project-overlay absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 hover:opacity-100 flex items-end p-6">
@@ -5264,7 +5524,7 @@
                 <!-- مشروع 3 -->
                 <div class="project-card bg-white rounded-2xl shadow-custom overflow-hidden hover:shadow-custom-hover hover:-translate-y-3">
                     <div class="h-auto overflow-hidden relative">
-                        <img src="./images/Artboard 4 (3).png" 
+                        <img src="./images/Artboard 8 (1).png" 
                              alt="مشروع تصميم وحدة تبريد خاصة" 
                              class="project-img w-full h-full object-cover">
                         <div class="project-overlay absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 hover:opacity-100 flex items-end p-6">
@@ -5295,39 +5555,89 @@
                     </div>
                 </div>
 
-                <!-- مشروع 4 -->
-                <div class="project-card bg-white rounded-2xl shadow-custom overflow-hidden hover:shadow-custom-hover hover:-translate-y-3">
-                    <div class="h-auto overflow-hidden relative">
-                        <img src="./images/Artboard 6 (3).png" 
-                             alt="مشروع تركيب وحدات تكييف متعددة" 
-                             class="project-img w-full h-full object-cover">
-                        <div class="project-overlay absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 hover:opacity-100 flex items-end p-6">
-                            <span class="text-white bg-primary px-4 py-1 rounded-full text-sm font-semibold">التكييف السكني</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h5 class="text-xl font-bold text-dark mb-3">تركيب وحدات تكييف متعددة</h5>
-                        <p class="text-gray-600 mb-4">مشروع في فيلا سكنية لضمان توزيع مثالي للهواء البارد.</p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="text-gray-700 text-sm flex items-center">
-                                <i class="fas fa-check text-secondary ml-2"></i>
-                                وحدات متعددة للمساحات الكبيرة
-                            </li>
-                            <li class="text-gray-700 text-sm flex items-center">
-                                <i class="fas fa-check text-secondary ml-2"></i>
-                                تحكم منفصل بكل وحدة
-                            </li>
-                            <li class="text-gray-700 text-sm flex items-center">
-                                <i class="fas fa-check text-secondary ml-2"></i>
-                                تصميم متناغم مع الديكور
-                            </li>
-                        </ul>
-                        <a href="#" class="project-link text-primary font-semibold flex items-center justify-end hover:text-secondary">
-                            معرفة التفاصيل
-                            <i class="fas fa-arrow-left mr-2"></i>
-                        </a>
-                    </div>
-                </div>
+<!-- مشروع 4 -->
+<div class="project-card bg-white rounded-2xl shadow-custom overflow-hidden hover:shadow-custom-hover hover:-translate-y-3">
+    <div class="h-auto overflow-hidden relative">
+        <img src="./images/Artboard 6 (3).png" 
+             alt="مشروع تنفيذ نظام تكييف دكت مركزي" 
+             class="project-img w-full h-full object-cover">
+        <div class="project-overlay absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 hover:opacity-100 flex items-end p-6">
+            <span class="text-white bg-primary px-4 py-1 rounded-full text-sm font-semibold">تكييف الدكت</span>
+        </div>
+    </div>
+    <div class="p-6">
+        <h5 class="text-xl font-bold text-dark mb-3">تنفيذ نظام تكييف دكت مركزي</h5>
+        <p class="text-gray-600 mb-4">مشروع متكامل في فيلا سكنية باستخدام نظام دكت لضمان توزيع هواء مثالي وشكل جمالي مخفي بالكامل.</p>
+        <ul class="space-y-2 mb-6">
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                قنوات دكت عالية الجودة لتدفق هواء قوي وثابت
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                فتحات مخفية تتماشى مع ديكور المنزل
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                عزل حراري وصوتي لزيادة كفاءة التبريد
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                تحكم مركزي وذكي للغرف
+            </li>
+        </ul>
+        <a href="#" class="project-link text-primary font-semibold flex items-center justify-end hover:text-secondary">
+            معرفة التفاصيل
+            <i class="fas fa-arrow-left mr-2"></i>
+        </a>
+    </div>
+</div>
+
+
+<!-- مشروع VRF / VRV -->
+<div class="project-card bg-white rounded-2xl shadow-custom overflow-hidden hover:shadow-custom-hover hover:-translate-y-3">
+    <div class="h-auto overflow-hidden relative">
+        <img src="./images/Artboard 7 (3).png" 
+             alt="مشروع تنفيذ أنظمة تكييف VRF / VRV" 
+             class="project-img w-full h-full object-cover">
+        <div class="project-overlay absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 hover:opacity-100 flex items-end p-6">
+            <span class="text-white bg-primary px-4 py-1 rounded-full text-sm font-semibold">تقنيات VRF / VRV</span>
+        </div>
+    </div>
+    <div class="p-6">
+        <h5 class="text-xl font-bold text-dark mb-3">تنفيذ أنظمة تكييف VRF / VRV المتطورة</h5>
+        <p class="text-gray-600 mb-4">
+            حلول تبريد ذكية تعتمد على توزيع الفريون المتغير لضمان أعلى كفاءة وتوفير للطاقة في المباني السكنية والتجارية.
+        </p>
+        <ul class="space-y-2 mb-6">
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                توفير عالي للطاقة بفضل التحكم الذكي في تدفق الفريون
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                تشغيل هادئ جداً مع أداء ثابت تحت أي ظروف تشغيل
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                التحكم المستقل في درجات الحرارة لكل غرفة
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                مرونة كبيرة في التركيب للمشاريع الكبيرة والمعقدة
+            </li>
+            <li class="text-gray-700 text-sm flex items-center">
+                <i class="fas fa-check text-secondary ml-2"></i>
+                عمر افتراضي طويل وصيانة أقل مقارنة بالأنظمة التقليدية
+            </li>
+        </ul>
+        <a href="#" class="project-link text-primary font-semibold flex items-center justify-end hover:text-secondary">
+            معرفة التفاصيل
+            <i class="fas fa-arrow-left mr-2"></i>
+        </a>
+    </div>
+</div>
+
 
 
 

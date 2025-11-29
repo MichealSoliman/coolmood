@@ -10,12 +10,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
+        
         :root {
             --primary-blue: #1e40af;
             --light-blue: #3b82f6;
-            --accent-blue: #60a5fa;
+            --accent-green: #10b981;
         }
         
         body {
@@ -23,111 +28,57 @@
             overflow-x: hidden;
         }
         
-        /* أنيميشنات مخصصة */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+        /* تأثيرات التمرير */
+        .scroll-section {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .scroll-section.active {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .scroll-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .scroll-left.active {
+            opacity: 1;
+            transform: translateX(0);
         }
         
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .scroll-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
-        @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .scroll-right.active {
+            opacity: 1;
+            transform: translateX(0);
         }
         
-        @keyframes rotateIn {
-            from {
-                opacity: 0;
-                transform: rotateY(90deg);
-            }
-            to {
-                opacity: 1;
-                transform: rotateY(0);
-            }
+        .scroll-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
+        .scroll-scale.active {
+            opacity: 1;
+            transform: scale(1);
         }
         
-        .animate-fadeInUp {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        
-        .animate-fadeInRight {
-            animation: fadeInRight 1s ease-out forwards;
-        }
-        
-        .animate-pulse-slow {
-            animation: pulse 3s infinite;
-        }
-        
-        .animate-slideIn {
-            animation: slideIn 1s ease-out forwards;
-        }
-        
-        .animate-zoomIn {
-            animation: zoomIn 1s ease-out forwards;
-        }
-        
-        .animate-rotateIn {
-            animation: rotateIn 1s ease-out forwards;
-        }
-        
+        /* تأثيرات البطاقات */
         .feature-card {
             transition: all 0.5s ease;
-            border-right: 4px solid transparent;
-            overflow: hidden;
+            border: 1px solid transparent;
             position: relative;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-right-color: var(--light-blue);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
         }
         
         .feature-card::before {
@@ -135,401 +86,345 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 64, 175, 0.05) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--light-blue), var(--accent-green));
+            transition: height 0.5s ease;
         }
         
         .feature-card:hover::before {
-            opacity: 1;
+            height: 100%;
         }
         
-        .image-hover {
-            transition: all 0.7s ease;
-            filter: brightness(0.9);
-            overflow: hidden;
+        .feature-card:hover {
+            transform: translateY(-12px);
+            border-color: #e5e7eb;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .icon-circle {
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover .icon-circle {
+            transform: scale(1.15) rotate(5deg);
+        }
+        
+        .spec-card-1 {
+            transition: all 0.4s ease;
+            border: 1px solid #f3f4f6;
             position: relative;
+            overflow: hidden;
         }
         
-        .image-hover:hover {
-            transform: scale(1.05);
-            filter: brightness(1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
-        
-        .image-hover::after {
+        .spec-card-1::before {
             content: '';
             position: absolute;
             top: 0;
             right: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.7) 100%);
-            opacity: 0.7;
-            transition: opacity 0.5s ease;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         
-        .image-hover:hover::after {
-            opacity: 0.3;
+        .spec-card-1:hover::before {
+            opacity: 1;
         }
         
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
+        .spec-card-1:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--light-blue);
+        }
         
-        .contact-icon {
-            transition: all 0.5s ease;
+        /* تأثيرات الصور */
+        .image-container {
             position: relative;
             overflow: hidden;
-        }
-        
-        .contact-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
-        
-        .contact-link:hover .contact-icon::before {
-            transform: translateX(0);
-        }
-        
-        .contact-link:hover .contact-icon {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* تأثيرات التمرير */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .scroll-reveal-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .scroll-reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .scroll-reveal-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .scroll-reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        /* تأثيرات الصور المتقدمة */
-        .image-3d {
+            border-radius: 20px;
             transform-style: preserve-3d;
             perspective: 1000px;
         }
         
-        .image-3d-inner {
-            transition: transform 0.7s ease;
-            transform: rotateY(0) rotateX(0);
-        }
-        
-        .image-3d:hover .image-3d-inner {
-            transform: rotateY(5deg) rotateX(5deg);
-        }
-        
-        /* عناصر عائمة إضافية */
-        .floating-shapes {
+        .image-container::before {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
             top: 0;
+            right: 0;
+            bottom: 0;
             left: 0;
-            z-index: 0;
-            pointer-events: none;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
         }
         
-        .shape {
-            position: absolute;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 50%;
-            animation: floatRandom 20s infinite linear;
+        .image-container:hover::before {
+            opacity: 1;
         }
         
-        .shape:nth-child(1) {
-            width: 100px;
-            height: 100px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
+        .image-container img {
+            transition: transform 0.8s ease;
+            transform: scale(1);
         }
         
-        .shape:nth-child(2) {
-            width: 150px;
-            height: 150px;
-            top: 70%;
-            left: 85%;
-            animation-delay: 5s;
-        }
-        
-        .shape:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            top: 40%;
-            left: 90%;
-            animation-delay: 10s;
-        }
-        
-        .shape:nth-child(4) {
-            width: 120px;
-            height: 120px;
-            top: 85%;
-            left: 10%;
-            animation-delay: 15s;
-        }
-        
-        @keyframes floatRandom {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(30px, 40px) rotate(90deg); }
-            50% { transform: translate(0, 80px) rotate(180deg); }
-            75% { transform: translate(-30px, 40px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
+        .image-container:hover img {
+            transform: scale(1.08);
         }
         
         /* تأثيرات النص */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .gradient-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        .gradient-text:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* عناصر عائمة */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* خط التقدم */
+        .progress-line {
+            position: relative;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, var(--light-blue), var(--accent-green));
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        
+        /* تأثيرات إضافية */
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
         .text-glow {
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
         }
         
         /* تحسينات للشاشات الصغيرة */
         @media (max-width: 768px) {
-            .hero-section {
-                padding: 3rem 0;
-            }
-            
-            .image-hover:hover {
-                transform: scale(1.02);
+            .scroll-section,
+            .scroll-left,
+            .scroll-right,
+            .scroll-scale {
+                transform: none !important;
+                transition: opacity 0.6s ease;
             }
         }
     </style>
 </head>
 <body>
-    <section class="py-20 md:py-32 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden" id="about">
+    <section class="py-20 md:py-32 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden" dir="rtl" id="features">
         <!-- عناصر زخرفية خلفية -->
-        <div class="absolute top-0 left-0 w-72 h-72 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-20"></div>
-        
-        <!-- عناصر عائمة إضافية -->
-        <div class="floating-shapes">
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-        </div>
+        <div class="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-20"></div>
         
         <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                <!-- المحتوى النصي -->
-                <div class="w-full lg:w-1/2">
-                    <div class="space-y-10">
-                        <!-- العنوان الرئيسي -->
-                        <div class="scroll-reveal">
-                            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-                                مرحبًا بكم في 
-                                <span class="gradient-text text-glow">مركز خدمات التكييف والتبريد</span> 
-                                الأفضل في جدة والمملكة
-                            </h2>
-                            <div class="w-32 h-2 bg-gradient-to-r from-blue-500 to-blue-300 rounded-full mt-4"></div>
-                        </div>
-                        
-                        <!-- بطاقات الميزات -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="feature-card bg-white p-6 rounded-2xl shadow-lg flex items-center scroll-reveal" style="animation-delay: 0.2s">
-                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center ml-4 animate-pulse-slow">
-                                    <i class="fas fa-user-tie text-blue-600 text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="text-xl font-bold text-gray-800">فنيون خبراء في جدة</h5>
-                                    <p class="text-gray-600 mt-2">فريق محترف مع أكثر من 10 سنوات خبرة</p>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-card bg-white p-6 rounded-2xl shadow-lg flex items-center scroll-reveal" style="animation-delay: 0.4s">
-                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center ml-4">
-                                    <i class="fas fa-award text-blue-600 text-2xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="text-xl font-bold text-gray-800">أفضل خدمات بجودة عالية</h5>
-                                    <p class="text-gray-600 mt-2">ضمان الجودة والكفاءة في كل خدمة</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- النص الوصفي -->
-                        <div class="scroll-reveal" style="animation-delay: 0.6s">
-                            <p class="text-xl md:text-2xl text-gray-700 leading-relaxed mb-6">
-                                نقدم خدمات تركيب وصيانة أنظمة التكييف المركزي باستخدام أحدث التقنيات
-                                مثل <span class="font-bold text-blue-600">VRF وVRV</span>. نحن نلتزم بتقديم الجودة والراحة 
-                                لعملائنا من خلال خبراتنا المتطورة.
-                            </p>
-                            <p class="text-lg text-gray-600 leading-relaxed">
-                                مع فريقنا المختص وأحدث المعدات، نضمن لكم بيئة مريحة ومناخ مثالي في منازلكم ومؤسساتكم على مدار السنة.
-                            </p>
-                        </div>
-                        
-                        <!-- معلومات الاتصال -->
-                        <div class="border-t border-gray-200 pt-8 space-y-6 scroll-reveal" style="animation-delay: 0.8s">
-                            <a href="tel:0596678717" class="contact-link flex items-center group">
-                                <div class="contact-icon w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white ml-4 animate-pulse-slow">
-                                    <i class="fas fa-phone-alt text-xl"></i>
-                                </div>
-                                <div>
-                                    <h5 class="text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors" dir="ltr">059 667 8717</h5>
-                                    <p class="text-gray-600">اتصل بنا الآن للحصول على استشارة مجانية</p>
-                                </div>
-                            </a>
-                            
-                            <a href="mailto:info@coolmood.net" class="contact-link flex items-center group">
-                                <div class="contact-icon w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white ml-4">
-                                    <i class="fas fa-envelope text-xl"></i>
-                                </div>
-                                <div>
-                                    <h6 class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">info@coolmood.net</h6>
-                                    <p class="text-gray-600">راسلنا عبر البريد لجميع استفساراتكم</p>
-                                </div>
-                            </a>
-                        </div>
+            <!-- Header Section -->
+            <div class="mb-20 text-center">
+                <div class="scroll-section">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+                        تكييف مركزي لا مثيل له مع 
+                        <span class="gradient-text text-glow">شركة أيوان الحجاز</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        نقدم حلولاً متكاملة وخدمات متميزة في مجال التكييف المركزي بجدة بأسعار مناسبة وجودة عالية.
+                    </p>
+                    <div class="w-32 h-2 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-10 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex flex-col lg:flex-row gap-16 items-center mb-20">
+                <!-- Image Column -->
+                <div class="w-full lg:w-1/2 h-auto scroll-left">
+                    <div class="image-container rounded-3xl shadow-2xl overflow-hidden">
+                        <img class="w-full h-auto object-cover" src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="خدمات أيوان الحجاز" loading="lazy">
+                    </div>
+                    
+                    <!-- عنصر عائم -->
+                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-full shadow-xl floating-element">
+                        <span class="font-bold text-lg">جودة لا تضاهى</span>
                     </div>
                 </div>
-                
-                <!-- معرض الصور -->
-                <div class="w-full lg:w-1/2">
-                    <div class="grid grid-cols-2 gap-6 relative">
-                        <!-- الصورة 1 -->
-                        <div class="scroll-reveal-right image-3d">
-                            <div class="image-hover rounded-3xl overflow-hidden shadow-2xl h-72 bg-gray-200 flex items-center justify-center">
-                                <div class="image-3d-inner w-full h-full">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="أنظمة تكييف متطورة">
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 hover:opacity-0 transition-opacity duration-500 flex items-end p-6">
-                                    <div>
-                                        <p class="text-white font-bold text-xl mb-2">أنظمة تكييف متطورة</p>
-                                        <div class="w-12 h-1 bg-blue-400 rounded-full"></div>
+
+                <!-- Services Cards -->
+                <div class="w-full lg:w-1/2 space-y-8">
+                    <!-- Card 1 -->
+                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.1s">
+                        <div class="flex items-start mb-4">
+                            <div class="icon-circle bg-blue-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6 pulse-glow">
+                                <i class="fas fa-tools text-3xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">تنفيذ أنظمة التكييف المركزي</h3>
+                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">توريد وتركيب وتأسيس أنظمة متكاملة للتكييف المركزي بأعلى معايير الجودة والكفاءة.</p>
+                                
+                                <!-- خط التقدم -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-600">جودة التنفيذ</span>
+                                        <span class="text-sm font-bold text-blue-600">100%</span>
+                                    </div>
+                                    <div class="progress-line">
+                                        <div class="progress-fill" style="width: 100%"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- الصورة 2 -->
-                        <div class="scroll-reveal-right image-3d" style="animation-delay: 0.2s">
-                            <div class="image-hover rounded-3xl overflow-hidden shadow-2xl h-80 bg-gray-200 flex items-center justify-center mt-8">
-                                <div class="image-3d-inner w-full h-full">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1545128485-c400e7702796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="فريق فني متخصص">
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 hover:opacity-0 transition-opacity duration-500 flex items-end p-6">
-                                    <div>
-                                        <p class="text-white font-bold text-xl mb-2">فريق فني متخصص</p>
-                                        <div class="w-12 h-1 bg-blue-400 rounded-full"></div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.2s">
+                        <div class="flex items-start mb-4">
+                            <div class="icon-circle bg-amber-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6">
+                                <i class="fas fa-cogs text-3xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">صيانة دورية شاملة</h3>
+                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">خدمات صيانة احترافية لضمان كفاءة وعمر أطول لنظام التكييف مع خطط صيانة مخصصة.</p>
+                                
+                                <!-- خط التقدم -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-600">سرعة الاستجابة</span>
+                                        <span class="text-sm font-bold text-amber-600">95%</span>
+                                    </div>
+                                    <div class="progress-line">
+                                        <div class="progress-fill" style="width: 95%"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- الصورة 3 -->
-                        <div class="scroll-reveal-right image-3d" style="animation-delay: 0.4s">
-                            <div class="image-hover rounded-3xl overflow-hidden shadow-2xl h-64 bg-gray-200 flex items-center justify-center -mt-4">
-                                <div class="image-3d-inner w-full h-full">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1558618666-fcd25856cd63?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="أحدث التقنيات">
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 hover:opacity-0 transition-opacity duration-500 flex items-end p-6">
-                                    <div>
-                                        <p class="text-white font-bold text-xl mb-2">أحدث التقنيات</p>
-                                        <div class="w-12 h-1 bg-blue-400 rounded-full"></div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.3s">
+                        <div class="flex items-start mb-4">
+                            <div class="icon-circle bg-green-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6">
+                                <i class="fas fa-headset text-3xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">دعم فني 24/7</h3>
+                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">فريق متخصص من المهندسين والفنيين لخدمتكم على مدار الساعة مع استجابة فورية للطوارئ.</p>
+                                
+                                <!-- خط التقدم -->
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-600">رضا العملاء</span>
+                                        <span class="text-sm font-bold text-green-600">98%</span>
+                                    </div>
+                                    <div class="progress-line">
+                                        <div class="progress-fill" style="width: 98%"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- الصورة 4 -->
-                        <div class="scroll-reveal-right image-3d" style="animation-delay: 0.6s">
-                            <div class="image-hover rounded-3xl overflow-hidden shadow-2xl h-80 bg-gray-200 flex items-center justify-center mt-4">
-                                <div class="image-3d-inner w-full h-full">
-                                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="خدمات شاملة">
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 hover:opacity-0 transition-opacity duration-500 flex items-end p-6">
-                                    <div>
-                                        <p class="text-white font-bold text-xl mb-2">خدمات شاملة</p>
-                                        <div class="w-12 h-1 bg-blue-400 rounded-full"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- عنصر زخرفي عائم -->
-                        <div class="absolute -bottom-8 -left-8 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-full shadow-xl animate-float">
-                            <span class="font-bold text-lg">+10 سنوات خبرة</span>
-                        </div>
-                        
-                        <!-- عنصر زخرفي إضافي -->
-                        <div class="absolute -top-6 -right-6 bg-gradient-to-r from-green-500 to-green-600 text-white py-2 px-5 rounded-full shadow-xl animate-float" style="animation-delay: 2s">
-                            <span class="font-bold">ضمان 3 سنوات</span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Specifications Section -->
+            <div class="mt-20 pt-20 border-t border-gray-200">
+                <div class="text-center mb-16 scroll-section">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+                        مواصفات وخصائص خدماتنا
+                    </h2>
+                    <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
+                        نضمن لكم أعلى معايير الجودة والأداء في كل مشروع ننفذه
+                    </p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-8 rounded-full"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Spec Card 1 -->
+                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.1s">
+                        <div class="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element">
+                            <i class="fas fa-fire fa-3x text-red-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">أنظمة مقاومة للحريق</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">تضمن أعلى معايير الأمان والسلامة مع مواد مقاومة للحريق.</p>
+                    </div>
+
+                    <!-- Spec Card 2 -->
+                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.2s">
+                        <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element" style="animation-delay: 1s">
+                            <i class="fas fa-cogs fa-3x text-green-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">معايير جودة عالية</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">مصممة لتحقيق الأداء المثالي والعمر الطويل مع ضمان الجودة.</p>
+                    </div>
+
+                    <!-- Spec Card 3 -->
+                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.3s">
+                        <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element" style="animation-delay: 2s">
+                            <i class="fas fa-headset fa-3x text-blue-500"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">دعم فني متكامل</h3>
+                        <p class="text-gray-600 leading-relaxed text-lg">تواصل سريع واستجابة فورية مع فريق دعم متكامل على مدار الساعة.</p>
+                    </div>
+                </div>
+            </div>
             
-            <!-- قسم إضافي للخبرات -->
-            <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 scroll-reveal" style="animation-delay: 1s">
-                <div class="bg-white rounded-2xl p-8 shadow-lg text-center transform transition-all duration-500 hover:shadow-2xl">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-tools text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">تركيب الأنظمة</h3>
-                    <p class="text-gray-600">نقوم بتركيب أنظمة التكييف المركزية والمنزلية بأحدث التقنيات وأعلى معايير الجودة</p>
+            <!-- قسم إضافي للإحصائيات -->
+            <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center scroll-left">
+                    <div class="text-4xl md:text-5xl font-bold text-blue-600 mb-2">+500</div>
+                    <div class="text-gray-600 text-lg">مشروع منفذ</div>
                 </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-lg text-center transform transition-all duration-500 hover:shadow-2xl">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-cogs text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">الصيانة الدورية</h3>
-                    <p class="text-gray-600">نوفر برامج صيانة دورية لضمان كفاءة وكفاءة أنظمة التكييف على مدار السنة</p>
+                <div class="text-center scroll-left" style="transition-delay: 0.1s">
+                    <div class="text-4xl md:text-5xl font-bold text-green-600 mb-2">98%</div>
+                    <div class="text-gray-600 text-lg">رضا العملاء</div>
                 </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-lg text-center transform transition-all duration-500 hover:shadow-2xl">
-                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-wrench text-blue-600 text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">الإصلاحات الطارئة</h3>
-                    <p class="text-gray-600">خدمة إصلاحات طارئة على مدار الساعة لمعالجة أي أعطال في أنظمة التكييف</p>
+                <div class="text-center scroll-right" style="transition-delay: 0.2s">
+                    <div class="text-4xl md:text-5xl font-bold text-amber-600 mb-2">24/7</div>
+                    <div class="text-gray-600 text-lg">دعم فني</div>
+                </div>
+                <div class="text-center scroll-right" style="transition-delay: 0.3s">
+                    <div class="text-4xl md:text-5xl font-bold text-red-600 mb-2">10+</div>
+                    <div class="text-gray-600 text-lg">سنوات خبرة</div>
                 </div>
             </div>
         </div>
@@ -538,12 +433,22 @@
     <script>
         // تفعيل تأثيرات التمرير
         document.addEventListener('DOMContentLoaded', function() {
-            const scrollRevealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right');
+            const scrollElements = document.querySelectorAll('.scroll-section, .scroll-left, .scroll-right, .scroll-scale');
             
             const scrollObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        
+                        // تفعيل خطوط التقدم
+                        if (entry.target.querySelector('.progress-fill')) {
+                            const progressFill = entry.target.querySelector('.progress-fill');
+                            const width = progressFill.style.width;
+                            progressFill.style.width = '0';
+                            setTimeout(() => {
+                                progressFill.style.width = width;
+                            }, 300);
+                        }
                     }
                 });
             }, { 
@@ -551,27 +456,66 @@
                 rootMargin: '0px 0px -50px 0px'
             });
             
-            scrollRevealElements.forEach(element => {
+            scrollElements.forEach(element => {
                 scrollObserver.observe(element);
             });
             
-            // تأثيرات الصور التفاعلية
-            const imageContainers = document.querySelectorAll('.image-3d');
+            // تأثيرات GSAP متقدمة
+            gsap.registerPlugin(ScrollTrigger);
             
-            imageContainers.forEach(container => {
-                container.addEventListener('mousemove', (e) => {
-                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                    container.querySelector('.image-3d-inner').style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            // تأثيرات للعناصر الرئيسية
+            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+                gsap.fromTo(card, {
+                    opacity: 0,
+                    y: 50
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.2,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
                 });
-                
-                container.addEventListener('mouseenter', () => {
-                    container.querySelector('.image-3d-inner').style.transition = 'none';
-                });
-                
-                container.addEventListener('mouseleave', () => {
-                    container.querySelector('.image-3d-inner').style.transition = 'transform 0.7s ease';
-                    container.querySelector('.image-3d-inner').style.transform = 'rotateY(0) rotateX(0)';
+            });
+            
+            // تأثيرات للصور
+            gsap.fromTo('.image-container', {
+                opacity: 0,
+                x: -100,
+                scale: 0.9
+            }, {
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: '.image-container',
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+            
+            // تأثيرات للإحصائيات
+            gsap.utils.toArray('.text-center.scroll-left, .text-center.scroll-right').forEach((stat, i) => {
+                gsap.fromTo(stat.querySelector('div:first-child'), {
+                    textContent: 0,
+                    opacity: 0.5
+                }, {
+                    textContent: stat.querySelector('div:first-child').textContent,
+                    duration: 2,
+                    opacity: 1,
+                    snap: { textContent: 1 },
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
                 });
             });
         });
