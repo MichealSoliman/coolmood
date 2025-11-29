@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أيوان الحجاز - نبذة عنا</title>
+    <title>أيوان الحجاز - المدن والأماكن</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -18,505 +18,599 @@
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
         
         :root {
-            --primary-blue: #1e40af;
-            --light-blue: #3b82f6;
-            --accent-green: #10b981;
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+            --dark-color: #1e3a8a;
         }
         
         body {
             font-family: 'Cairo', sans-serif;
-            overflow-x: hidden;
         }
         
-        /* تأثيرات التمرير */
-        .scroll-section {
+        .locations-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-pin {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, var(--accent-color), var(--primary-color));
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            animation: pinPulse 2s infinite;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+        }
+        
+        @keyframes pinPulse {
+            0% { transform: rotate(-45deg) scale(1); opacity: 1; }
+            50% { transform: rotate(-45deg) scale(1.1); opacity: 0.8; }
+            100% { transform: rotate(-45deg) scale(1); opacity: 1; }
+        }
+        
+        .location-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
             opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(50px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         
-        .scroll-section.active {
+        .location-card.active {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .scroll-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .scroll-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .scroll-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .scroll-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .scroll-scale {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .scroll-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        /* تأثيرات البطاقات */
-        .feature-card {
-            transition: all 0.5s ease;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 4px;
-            height: 0;
-            background: linear-gradient(to bottom, var(--light-blue), var(--accent-green));
-            transition: height 0.5s ease;
-        }
-        
-        .feature-card:hover::before {
-            height: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-12px);
-            border-color: #e5e7eb;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .icon-circle {
-            transition: all 0.4s ease;
-        }
-        
-        .feature-card:hover .icon-circle {
-            transform: scale(1.15) rotate(5deg);
-        }
-        
-        .spec-card-1 {
-            transition: all 0.4s ease;
-            border: 1px solid #f3f4f6;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .spec-card-1::before {
+        .location-card::before {
             content: '';
             position: absolute;
             top: 0;
             right: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .spec-card-1:hover::before {
-            opacity: 1;
-        }
-        
-        .spec-card-1:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-color: var(--light-blue);
-        }
-        
-        /* تأثيرات الصور */
-        .image-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        
-        .image-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(45deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 1;
-        }
-        
-        .image-container:hover::before {
-            opacity: 1;
-        }
-        
-        .image-container img {
-            transition: transform 0.8s ease;
-            transform: scale(1);
-        }
-        
-        .image-container:hover img {
-            transform: scale(1.08);
-        }
-        
-        /* تأثيرات النص */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-        }
-        
-        .gradient-text::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             transform: scaleX(0);
-            transform-origin: right;
             transition: transform 0.4s ease;
         }
         
-        .gradient-text:hover::after {
+        .location-card:hover::before {
             transform: scaleX(1);
         }
         
-        /* عناصر عائمة */
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
+        .location-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--accent-color);
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+        .location-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.4s ease;
         }
         
-        /* خط التقدم */
-        .progress-line {
-            position: relative;
-            height: 4px;
-            background: #e5e7eb;
-            border-radius: 2px;
-            overflow: hidden;
+        .location-card:hover .location-icon {
+            transform: scale(1.1) rotate(10deg);
         }
         
-        .progress-fill {
+        .city-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .colorful-text {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        
+        .floating-map {
             position: absolute;
-            top: 0;
-            right: 0;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--light-blue), var(--accent-green));
-            width: 0;
-            transition: width 1.5s ease;
+            top: 0;
+            left: 0;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10a40 40 0 1 0 0 80 40 40 0 0 0 0-80zm0 5a35 35 0 1 1 0 70 35 35 0 0 1 0-70z" fill="%231e40af"/><path d="M50 20a30 30 0 1 0 0 60 30 30 0 0 0 0-60zm0 5a25 25 0 1 1 0 50 25 25 0 0 1 0-50z" fill="%233b82f6"/><circle cx="50" cy="50" r="10" fill="%2360a5fa"/></svg>');
+            background-size: cover;
+            pointer-events: none;
         }
         
-        /* تأثيرات إضافية */
-        .pulse-glow {
-            animation: pulseGlow 2s infinite;
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+        .delay-6 { transition-delay: 0.6s; }
+        
+        .counter {
+            font-variant-numeric: tabular-nums;
         }
         
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        /* تخصيص شريط التمرير */
+        .location-card::-webkit-scrollbar {
+            width: 6px;
         }
         
-        .text-glow {
-            text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        .location-card::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
         }
         
-        /* تحسينات للشاشات الصغيرة */
-        @media (max-width: 768px) {
-            .scroll-section,
-            .scroll-left,
-            .scroll-right,
-            .scroll-scale {
-                transform: none !important;
-                transition: opacity 0.6s ease;
-            }
+        .location-card::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
+        }
+        
+        .location-card::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <section class="py-20 md:py-32 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden" dir="rtl" id="features">
-        <!-- عناصر زخرفية خلفية -->
-        <div class="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full -translate-x-1/2 -translate-y-1/2 opacity-30"></div>
-        <div class="absolute bottom-0 right-0 w-80 h-80 bg-blue-200 rounded-full translate-x-1/2 translate-y-1/2 opacity-20"></div>
+    <!-- قسم المدن والأماكن -->
+    <section class="py-20 md:py-32 locations-section relative overflow-hidden" id="locations-section" dir="rtl">
+        
+        <!-- خلفية الخريطة -->
+        <div class="floating-map"></div>
+        
+        <!-- دبابيس عائمة -->
+        <div class="floating-pin" style="top: 20%; left: 15%;"></div>
+        <div class="floating-pin" style="top: 60%; left: 25%; animation-delay: 0.5s;"></div>
+        <div class="floating-pin" style="top: 40%; left: 70%; animation-delay: 1s;"></div>
+        <div class="floating-pin" style="top: 80%; left: 60%; animation-delay: 1.5s;"></div>
+        <div class="floating-pin" style="top: 30%; left: 85%; animation-delay: 2s;"></div>
         
         <div class="container mx-auto px-4 relative z-10">
-            <!-- Header Section -->
-            <div class="mb-20 text-center">
-                <div class="scroll-section">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-                        تكييف مركزي لا مثيل له مع 
-                        <span class="gradient-text text-glow">شركة أيوان الحجاز</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        نقدم حلولاً متكاملة وخدمات متميزة في مجال التكييف المركزي بجدة بأسعار مناسبة وجودة عالية.
-                    </p>
-                    <div class="w-32 h-2 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-10 rounded-full"></div>
+            <!-- العنوان الرئيسي -->
+            <div class="text-center mb-20">
+                <div class="inline-block mb-6">
+                    <span class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-3 rounded-full text-lg font-bold shadow-lg">
+                        <i class="fas fa-map-marked-alt ml-2"></i>
+                        بصمتنا في المملكة
+                    </span>
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+                    <span class="colorful-text">الأماكن والمشاريع</span> التي نفخر بها
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    نفتخر بخدمة عملائنا في أبرز الأحياء والمشاريع في جدة ومكة المكرمة، حيث نقدم حلول التكييف المركزي بأعلى معايير الجودة
+                </p>
+                <div class="w-32 h-1 bg-gradient-to-r from-blue-400 to-indigo-400 mx-auto mt-8 rounded-full"></div>
+            </div>
+
+            <!-- إحصائيات -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+                <div class="text-center">
+                    <div class="stats-number counter" data-count="30">0</div>
+                    <div class="text-gray-600 text-lg">حي سكني</div>
+                </div>
+                <div class="text-center">
+                    <div class="stats-number counter" data-count="15">0</div>
+                    <div class="text-gray-600 text-lg">برج تجاري</div>
+                </div>
+                <div class="text-center">
+                    <div class="stats-number counter" data-count="25">0</div>
+                    <div class="text-gray-600 text-lg">فيلا سكنية</div>
+                </div>
+                <div class="text-center">
+                    <div class="stats-number counter" data-count="10">0</div>
+                    <div class="text-gray-600 text-lg">مشروع حكومي</div>
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="flex flex-col lg:flex-row gap-16 items-center mb-20">
-                <!-- Image Column -->
-                <div class="w-full lg:w-1/2 h-auto scroll-left">
-                    <div class="image-container rounded-3xl shadow-2xl overflow-hidden">
-                        <img class="w-full h-auto object-cover" src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="خدمات أيوان الحجاز" loading="lazy">
-                    </div>
-                    
-                    <!-- عنصر عائم -->
-                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-full shadow-xl floating-element">
-                        <span class="font-bold text-lg">جودة لا تضاهى</span>
-                    </div>
-                </div>
-
-                <!-- Services Cards -->
-                <div class="w-full lg:w-1/2 space-y-8">
-                    <!-- Card 1 -->
-                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.1s">
-                        <div class="flex items-start mb-4">
-                            <div class="icon-circle bg-blue-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6 pulse-glow">
-                                <i class="fas fa-tools text-3xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">تنفيذ أنظمة التكييف المركزي</h3>
-                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">توريد وتركيب وتأسيس أنظمة متكاملة للتكييف المركزي بأعلى معايير الجودة والكفاءة.</p>
-                                
-                                <!-- خط التقدم -->
-                                <div class="mt-4">
-                                    <div class="flex justify-between mb-2">
-                                        <span class="text-sm font-medium text-gray-600">جودة التنفيذ</span>
-                                        <span class="text-sm font-bold text-blue-600">100%</span>
-                                    </div>
-                                    <div class="progress-line">
-                                        <div class="progress-fill" style="width: 100%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.2s">
-                        <div class="flex items-start mb-4">
-                            <div class="icon-circle bg-amber-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6">
-                                <i class="fas fa-cogs text-3xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">صيانة دورية شاملة</h3>
-                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">خدمات صيانة احترافية لضمان كفاءة وعمر أطول لنظام التكييف مع خطط صيانة مخصصة.</p>
-                                
-                                <!-- خط التقدم -->
-                                <div class="mt-4">
-                                    <div class="flex justify-between mb-2">
-                                        <span class="text-sm font-medium text-gray-600">سرعة الاستجابة</span>
-                                        <span class="text-sm font-bold text-amber-600">95%</span>
-                                    </div>
-                                    <div class="progress-line">
-                                        <div class="progress-fill" style="width: 95%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="feature-card bg-white rounded-3xl p-8 shadow-xl border border-gray-100 scroll-right" style="transition-delay: 0.3s">
-                        <div class="flex items-start mb-4">
-                            <div class="icon-circle bg-green-500 text-white w-20 h-20 rounded-full flex items-center justify-center ml-6">
-                                <i class="fas fa-headset text-3xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">دعم فني 24/7</h3>
-                                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-6">فريق متخصص من المهندسين والفنيين لخدمتكم على مدار الساعة مع استجابة فورية للطوارئ.</p>
-                                
-                                <!-- خط التقدم -->
-                                <div class="mt-4">
-                                    <div class="flex justify-between mb-2">
-                                        <span class="text-sm font-medium text-gray-600">رضا العملاء</span>
-                                        <span class="text-sm font-bold text-green-600">98%</span>
-                                    </div>
-                                    <div class="progress-line">
-                                        <div class="progress-fill" style="width: 98%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Specifications Section -->
-            <div class="mt-20 pt-20 border-t border-gray-200">
-                <div class="text-center mb-16 scroll-section">
-                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-                        مواصفات وخصائص خدماتنا
-                    </h2>
-                    <p class="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto">
-                        نضمن لكم أعلى معايير الجودة والأداء في كل مشروع ننفذه
-                    </p>
-                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-8 rounded-full"></div>
-                </div>
+            <!-- شبكة البطاقات -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <!-- Spec Card 1 -->
-                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.1s">
-                        <div class="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element">
-                            <i class="fas fa-fire fa-3x text-red-500"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6">أنظمة مقاومة للحريق</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg">تضمن أعلى معايير الأمان والسلامة مع مواد مقاومة للحريق.</p>
+                <!-- بطاقة جدة -->
+                <div class="location-card delay-1">
+                    <div class="city-badge">جدة</div>
+                    <div class="location-icon">
+                        <i class="fas fa-city"></i>
                     </div>
-
-                    <!-- Spec Card 2 -->
-                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.2s">
-                        <div class="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element" style="animation-delay: 1s">
-                            <i class="fas fa-cogs fa-3x text-green-500"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">أحياء جدة السكنية</h3>
+                    <div class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي البوادي
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6">معايير جودة عالية</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg">مصممة لتحقيق الأداء المثالي والعمر الطويل مع ضمان الجودة.</p>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الزهراء
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي النهضة
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي السامر
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الريان
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الخمره
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي السنابل
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الصفا
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الفيحاء
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الحمدانيه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            مخطط الرياض
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            حي الصالحيه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            أبحر الشماليه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            أبحر الجنوبيه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            ذهبان
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-blue-500"></i>
+                            عسفان
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Spec Card 3 -->
-                    <div class="spec-card-1 bg-white rounded-3xl p-10 text-center shadow-xl scroll-scale" style="transition-delay: 0.3s">
-                        <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8 floating-element" style="animation-delay: 2s">
-                            <i class="fas fa-headset fa-3x text-blue-500"></i>
+                <!-- بطاقة الأبراج والمجمعات -->
+                <div class="location-card delay-2">
+                    <div class="city-badge">أبراج ومجمعات</div>
+                    <div class="location-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">مشاريع الأبراج والمجمعات</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            الياقوت
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6">دعم فني متكامل</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg">تواصل سريع واستجابة فورية مع فريق دعم متكامل على مدار الساعة.</p>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            الزمرد
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            المرجان
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            الشراع
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            حي الإسكان
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            حي الخالديه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            حي شاطي مارينا
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            حي الشاطي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            برج بيتش تاور
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            برج البلاتيني
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-star ml-2 text-yellow-500"></i>
+                            برج إعمار
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة مكة المكرمة -->
+                <div class="location-card delay-3">
+                    <div class="city-badge">مكة المكرمة</div>
+                    <div class="location-icon">
+                        <i class="fas fa-kaaba"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">مشاريع مكة المكرمة</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            برج الساعه بمكه محلات تجاريه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            مدينه مكه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            حي الذايدي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            حي العزيزيه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            حي الخالديه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            برج الساعه بمكه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt ml-2 text-green-500"></i>
+                            أبراج مسك
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة الفلل السكنية -->
+                <div class="location-card delay-4">
+                    <div class="city-badge">فلل سكنية</div>
+                    <div class="location-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">مشاريع الفلل السكنية</h3>
+                    <div class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            10 فلل سكنيه - مخطط ولي العهد
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ عماد حجازي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ عثمان الغامدي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ أحمد الزهراني
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ محمد الغامدي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا المهندس توفيق أحمد
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الدكتور هاشم جوهرجي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ سعيد المالكي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ مصطفي بن داوود
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الدكتور أحمد المالكي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الدكتور وديع المنشئ بولي العهد
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-home ml-2 text-purple-500"></i>
+                            فيلا الشيخ حسن اللحياني بالذايدي
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة المشاريع الحكومية -->
+                <div class="location-card delay-5">
+                    <div class="city-badge">مشاريع حكومية</div>
+                    <div class="location-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">المشاريع الحكومية</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-hospital ml-2 text-red-500"></i>
+                            مستشفي ديم الطبي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-hospital ml-2 text-red-500"></i>
+                            مستشفي الملك عبدالله
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-shield-alt ml-2 text-yellow-500"></i>
+                            مكتب مكافحة المخدرات
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-id-card ml-2 text-green-500"></i>
+                            الأحوال المدنية
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-music ml-2 text-purple-500"></i>
+                            حي جميل للموسيقي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-music ml-2 text-purple-500"></i>
+                            المركز السعودي للموسيقي
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-hard-hat ml-2 text-orange-500"></i>
+                            شركه الرواد الفنيه للمقاولات
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بطاقة المشاريع المميزة -->
+                <div class="location-card delay-6">
+                    <div class="city-badge">مشاريع مميزة</div>
+                    <div class="location-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">مشاريعنا المميزة</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-palace ml-2 text-yellow-500"></i>
+                            قصر السلام بجده
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-palace ml-2 text-yellow-500"></i>
+                            قصر الدكتور محمد عباس واخوانه
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-map ml-2 text-blue-500"></i>
+                            مخطط ولي العهد 1-8-9
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
+                        <h4 class="text-gray-800 font-bold mb-2">نفتخر بثقة عملائنا</h4>
+                        <p class="text-gray-600 text-sm">نحن نعتز بثقة عملائنا الكرام من الشخصيات البارزة والمؤسسات المرموقة التي اختارتنا لتنفيذ مشاريعها</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- قسم إضافي للإحصائيات -->
-            <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center scroll-left">
-                    <div class="text-4xl md:text-5xl font-bold text-blue-600 mb-2">+500</div>
-                    <div class="text-gray-600 text-lg">مشروع منفذ</div>
-                </div>
-                <div class="text-center scroll-left" style="transition-delay: 0.1s">
-                    <div class="text-4xl md:text-5xl font-bold text-green-600 mb-2">98%</div>
-                    <div class="text-gray-600 text-lg">رضا العملاء</div>
-                </div>
-                <div class="text-center scroll-right" style="transition-delay: 0.2s">
-                    <div class="text-4xl md:text-5xl font-bold text-amber-600 mb-2">24/7</div>
-                    <div class="text-gray-600 text-lg">دعم فني</div>
-                </div>
-                <div class="text-center scroll-right" style="transition-delay: 0.3s">
-                    <div class="text-4xl md:text-5xl font-bold text-red-600 mb-2">10+</div>
-                    <div class="text-gray-600 text-lg">سنوات خبرة</div>
+
+            <!-- ختم الجودة -->
+            <div class="mt-20 text-center">
+                <div class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-8 py-4 rounded-2xl shadow-2xl">
+                    <i class="fas fa-award text-2xl ml-3"></i>
+                    <span class="text-xl font-bold">شهادات الجودة والتميز في كل مشروع</span>
                 </div>
             </div>
         </div>
     </section>
 
     <script>
-        // تفعيل تأثيرات التمرير
+        // تفعيل تأثيرات GSAP للبطاقات
         document.addEventListener('DOMContentLoaded', function() {
-            const scrollElements = document.querySelectorAll('.scroll-section, .scroll-left, .scroll-right, .scroll-scale');
-            
-            const scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        
-                        // تفعيل خطوط التقدم
-                        if (entry.target.querySelector('.progress-fill')) {
-                            const progressFill = entry.target.querySelector('.progress-fill');
-                            const width = progressFill.style.width;
-                            progressFill.style.width = '0';
-                            setTimeout(() => {
-                                progressFill.style.width = width;
-                            }, 300);
-                        }
-                    }
-                });
-            }, { 
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            scrollElements.forEach(element => {
-                scrollObserver.observe(element);
-            });
-            
-            // تأثيرات GSAP متقدمة
             gsap.registerPlugin(ScrollTrigger);
             
-            // تأثيرات للعناصر الرئيسية
-            gsap.utils.toArray('.feature-card').forEach((card, i) => {
+            // تأثيرات للبطاقات
+            const cards = gsap.utils.toArray('.location-card');
+            
+            cards.forEach((card, index) => {
                 gsap.fromTo(card, {
                     opacity: 0,
-                    y: 50
+                    y: 50,
+                    rotationY: 10
                 }, {
                     opacity: 1,
                     y: 0,
+                    rotationY: 0,
                     duration: 0.8,
-                    delay: i * 0.2,
+                    delay: index * 0.1,
+                    ease: "back.out(1.7)",
                     scrollTrigger: {
                         trigger: card,
-                        start: "top 80%",
+                        start: "top 85%",
                         end: "bottom 20%",
                         toggleActions: "play none none reverse"
+                    },
+                    onComplete: function() {
+                        card.classList.add('active');
                     }
                 });
             });
             
-            // تأثيرات للصور
-            gsap.fromTo('.image-container', {
-                opacity: 0,
-                x: -100,
-                scale: 0.9
-            }, {
-                opacity: 1,
-                x: 0,
-                scale: 1,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: '.image-container',
+            // تأثيرات العدادات
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                ScrollTrigger.create({
+                    trigger: counter,
                     start: "top 80%",
-                    end: "bottom 20%",
+                    onEnter: updateCounter,
+                    once: true
+                });
+            });
+            
+            // تأثيرات للعنوان الرئيسي
+            gsap.fromTo('.colorful-text', {
+                backgroundPosition: '100% 0%'
+            }, {
+                backgroundPosition: '0% 0%',
+                duration: 2,
+                ease: "power2.inOut",
+                scrollTrigger: {
+                    trigger: '.colorful-text',
+                    start: "top 90%",
+                    end: "bottom 60%",
                     toggleActions: "play none none reverse"
                 }
-            });
-            
-            // تأثيرات للإحصائيات
-            gsap.utils.toArray('.text-center.scroll-left, .text-center.scroll-right').forEach((stat, i) => {
-                gsap.fromTo(stat.querySelector('div:first-child'), {
-                    textContent: 0,
-                    opacity: 0.5
-                }, {
-                    textContent: stat.querySelector('div:first-child').textContent,
-                    duration: 2,
-                    opacity: 1,
-                    snap: { textContent: 1 },
-                    scrollTrigger: {
-                        trigger: stat,
-                        start: "top 80%",
-                        end: "bottom 20%",
-                        toggleActions: "play none none reverse"
-                    }
-                });
             });
         });
     </script>
